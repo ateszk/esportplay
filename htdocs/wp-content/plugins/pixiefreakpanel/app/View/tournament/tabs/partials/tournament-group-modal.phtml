@@ -1,0 +1,41 @@
+<div id="modal-tournament-group" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p">
+                <?php echo ___('Create Tournament Group'); ?>
+            </p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Group Name', true); ?>" id="tournament-group-name">
+
+                    <select class="staff-select input-staff" id="tournament-group-tournament_id">
+                        <?php $tournaments = \PixieFreakPanel\Model\Tournament::query()->get(); ?>
+                        <?php if ($tournaments->isNotEmpty()): ?>
+
+                            <?php foreach ($tournaments as $tournament): ?>
+                                <option value="<?php echo $tournament->id; ?>">
+                                    <?php echo $tournament->name; ?>
+                                </option>
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-tournament-group"
+                   data-id="0">
+        </div>
+    </div>
+</div>

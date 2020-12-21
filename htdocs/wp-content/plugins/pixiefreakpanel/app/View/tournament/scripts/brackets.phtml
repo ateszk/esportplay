@@ -1,0 +1,96 @@
+<script>
+    jQuery(document).ready(function() {
+        let bracketTabSelector  = $('#wpbody-content > div.main-content > section > ul > li:nth-child(5) > a');
+        bracketTabSelector.hide();
+        if (hasParam('bracket-id')) {
+            bracketTabSelector.trigger('click');
+        }
+
+        window.bracketData = <?php
+            $tournaments = \PixieFreakPanel\Model\Tournament::query()->find(request()->get('bracket-id'));
+            echo !empty($tournaments) ? $tournaments->brackets : \PixieFreakPanel\Model\Tournament::BRACKETS
+        ?>
+
+        var teamData = <?php
+                $teams = \PixieFreakPanel\Model\Team::query()->json();
+                echo !empty($teams) ? $teams : '"";'
+            ?>
+
+        $('.panzoom-elements').bracket({
+            init: bracketData,
+            teamWidth: 160,
+            scoreWidth: 48,
+            matchMargin: 100,
+            skipConsolationRound: true,
+            centerConnectors: true,
+            decorator: {
+                render: function (container, data, score, state) {
+                    switch(state) {
+                        case "empty-bye":
+                            container.append('No Teams');
+                            return;
+                        case "empty-tbd":
+                            container.append('Upcoming');
+                            return;
+                        case "entry-no-score":
+                        case "entry-default-win":
+                        case "entry-complete":
+                            container.append(data);
+                            return;
+                    }
+                },
+
+                edit: function(container, data, doneCb) {
+                    var input = $('<input type="text">')
+                        .val(data)
+
+                        .autocomplete({
+                            source: teamData
+                        })
+
+                        .blur(function() {
+                            doneCb(input.val())
+                        })
+
+                        .keyup(function(e) {
+                            if ((e.keyCode||e.which)===13) {
+                                input.blur()
+                            }
+                        })
+                    ;
+
+                    container.html(input);
+                    input.focus();
+                }
+            },
+
+            save: function(data) {
+                saveDiagram(data);
+            }
+        });
+
+        var saveDiagram = function(data, reload = false) {
+            $.post('<?php echo route('tournament_updateBracket') ;?>', {
+                'action': '<?php echo route('tournament_updateBracket', false) ;?>',
+                'tournamentId': '<?php echo request()->get('bracket-id'); ?>',
+                'bracket': data,
+                'page': '<?php echo route('tournament_updateBracket', false) ;?>',
+                'contentType': 'application/json',
+                'dataType': 'json',
+            }, function(response) {
+                if (reload) {
+                    location.reload();
+                }
+            });
+        };
+
+        $('.save-bracket').on('click', function(e) {
+            saveDiagram($('.panzoom-elements').bracket('data'));
+        });
+
+        $('.reset-bracket').on('click', function(e) {
+            preventAll(e);
+            saveDiagram('reset', true);
+        });
+    });
+</script>

@@ -1,0 +1,9 @@
+<?php
+
+foreach (new DirectoryIterator(__DIR__ . '/tabs/') as $file) {
+    if ($file->isFile()) {
+        include ($file->getRealPath());
+    }
+}
+
+scripts(__DIR__ .'/tabs/', 'general');

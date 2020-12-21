@@ -1,0 +1,24 @@
+<script>
+    jQuery(document).ready(function() {
+        DataTable('datatableTournamentGroup');
+        ModalResolver()
+            .setTableSelector('#datatableTournamentGroup')
+            .setModalSelector('#modal-tournament-group')
+            .setInputPrefix('#tournament-group-')
+            .setCreateSelector('#add-group')
+            .setEditSelector('.edit-tournament-group')
+            .setRemoveSelector('.remove-tournament-group')
+            .setSaveSelector('.save-tournament-group')
+            .setPrimaryKeySelector('tournamentGroupId')
+            .setCreateEndpoint('<?php echo route('tournament_createTournamentGroup') ;?>')
+            .setEditEndpoint('<?php echo route('tournament_getTournamentGroup') ;?>')
+            .setUpdateEndpoint('<?php echo route('tournament_updateTournamentGroup') ;?>')
+            .setRemoveEndpoint('<?php echo route('tournament_removeTournamentGroup'); ?>')
+            .setTableRowSelector('#tr-group-')
+            .setAccessorMap(['name', 'tournament_id'])
+            .init()
+        ;
+
+        Sortable('<?php echo class_slasher(\PixieFreakPanel\Model\TournamentGroup::class);?>', 'tr-group-', '.sortableGroup');
+    });
+</script>

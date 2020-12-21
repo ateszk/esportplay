@@ -1,0 +1,73 @@
+<section id="demo" class="admin-section">
+    <form method="POST"
+          class="footer-options-form"
+          enctype="multipart/form-data"
+          id="form-type"
+    >
+        <input type="hidden" name="page" value="" id="page-id">
+        <h2><?php esc_html_e('Demo content', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <?php echo esc_html__('Select one of the demos here and click the import button to import the demo content. 
+            To see how the demos look, click this link here:', 'pixiehugepanel') .
+            ' <a href="' . esc_url('http://themes.pixiesquad.com/pixiefreak/') . '">
+                http://themes.pixiesquad.com/pixiefreak
+            </a> ' . esc_html__('Don\'t forget to upload the WordPress demo content!', 'pixiefreakpanel') ?>
+        </p>
+
+        <table class="form-table">
+            <tbody>
+                <tr>
+                    <th scope="row">
+                        <?php esc_html_e('Predefined Styles', 'pixiefreakpanel'); ?>
+                        <p class="description">
+                            <?php esc_html_e('Pick from predefined styles.', 'pixiefreakpanel'); ?>
+                        </p>
+                    </th>
+                    <td class="tdCheckbox">
+                        <select type="text" class="pixie-input" name="import_type" required>
+                            <option value="0">Select a demo</option>
+                            <option value="twisting-nether">Twisting Nether</option>
+                            <option value="unforgivable-sear">Unforgivable Sear</option>
+                            <option value="vicious-champions">Vicious Champions</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <?php esc_html_e('Exported File', 'pixiefreakpanel'); ?>
+                        <p class="description">
+                            <?php esc_html_e('Select exported .SQL file', 'pixiefreakpanel'); ?>
+                        </p>
+                    </th>
+                    <td class="tdCheckbox">
+                        <input type="file" name="database_file">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="submit">
+            <input type="submit"
+                   name="submitBtn"
+                   value="Import"
+                   id="submit-pixiefreakpanel_demo_import"
+                   class="button button-primary">
+            <input type="hidden" name="active-tab" class="active-tab">
+        </p>
+
+
+        <br>
+
+        <p class="submit" style="margin-left: 10px; margin-top: -8px;">
+            <input type="submit"
+                   name="submitBtn"
+                   value="Export"
+                   id="submit-pixiefreakpanel_demo_export"
+                   class="button button-primary">
+            <input type="hidden" name="active-tab" class="active-tab">
+        </p>
+    </form>
+</section>
+
+<?php scripts(__DIR__, 'demo'); ?>

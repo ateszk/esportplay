@@ -1,0 +1,44 @@
+<div id="modal-tournament-group-team" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p">
+                <?php echo ___('Create Tournament Group Team'); ?>
+            </p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+                <div class="input-groups">
+                    <select class="staff-select input-staff" id="tournament-group-team-tournament_group_team_id">
+                        <?php $teams = \PixieFreakPanel\Model\Team::query()->get(); ?>
+                        <?php if ($teams->isNotEmpty()): ?>
+
+                            <?php foreach ($teams as $team): ?>
+                                <option value="<?php echo $team->id; ?>">
+                                    <?php echo $team->name; ?>
+                                </option>
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
+                    </select>
+
+                    <input type="text" class="input-staff" placeholder="<?php ___('Win', true); ?>" id="tournament-group-team-win">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Loss', true); ?>" id="tournament-group-team-loss">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Draw', true); ?>" id="tournament-group-team-draw">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Points', true); ?>" id="tournament-group-team-point">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-tournament-group-team"
+                   data-id="0"
+            >
+        </div>
+    </div>
+</div>

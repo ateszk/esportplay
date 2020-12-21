@@ -1,0 +1,29 @@
+<div id="modal-stats" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p"><?php echo ___('Edit Statistic'); ?></p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Win', true); ?>" id="team-win">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Loses', true); ?>" id="team-loses">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Ties', true); ?>" id="team-ties">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-stats"
+                   data-id="0"
+            >
+        </div>
+    </div>
+</div>

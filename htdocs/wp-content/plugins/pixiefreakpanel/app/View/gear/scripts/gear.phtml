@@ -1,0 +1,26 @@
+<script>
+    jQuery(document).ready(function() {
+        DataTable('datatableGear');
+        WpMedia('.new-image', '#gear-image', '.staff-member-image > img');
+        ModalResolver()
+            .setTableSelector('#datatableGear')
+            .setModalSelector('#modal-gear')
+            .setInputPrefix('#gear-')
+            .setCreateSelector('#add-gear')
+            .setEditSelector('.edit-gear')
+            .setImageResourceId('image')
+            .setRemoveSelector('.remove-gear')
+            .setSaveSelector('.save-gear')
+            .setPrimaryKeySelector('gearId')
+            .setCreateEndpoint('<?php echo route('gear_createGear') ;?>')
+            .setEditEndpoint('<?php echo route('gear_getGear') ;?>')
+            .setUpdateEndpoint('<?php echo route('gear_updateGear') ;?>')
+            .setRemoveEndpoint('<?php echo route('gear_removeGear'); ?>')
+            .setTableRowSelector('#tr-')
+            .setAccessorMap(['name', 'type', 'image', 'link', 'recommended'])
+            .init()
+        ;
+
+        Sortable('<?php echo class_slasher(\PixieFreakPanel\Model\Gear::class);?>', 'tr-', '.sortableGear');
+    });
+</script>

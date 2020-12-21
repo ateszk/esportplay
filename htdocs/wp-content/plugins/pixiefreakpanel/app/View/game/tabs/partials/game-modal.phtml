@@ -1,0 +1,52 @@
+<div id="modal-game" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p"><?php echo ___('Edit Game'); ?></p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Logo', true); ?></h4>
+                </div>
+                <div class="staff-member-image s12 each-thumbnail">
+                    <img src="">
+                    <input type="hidden" value="" id="game-thumbnail">
+                    <input type="submit" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary save-stats new-image pick12"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Banner', true); ?></h4>
+                </div>
+                <div class="staff-member-image s23 each-cover">
+                    <img src="">
+                    <input type="hidden" value="" id="game-cover">
+                    <input type="submit" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary save-stats new-image pick23"
+                    >
+                </div>
+
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Name', true); ?>" id="game-name">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-game"
+                   data-id="0"
+            >
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<tr id="tr-<?php echo $tournament->id; ?>">
+
+    <td class="tc"><?php echo $tournament->id; ?></td>
+
+    <td class="tc">
+        <?php echo $tournament->name; ?>
+    </td>
+
+    <td class="tc">
+        <div class="bgForImg hoverable">
+            <img src="<?php echo $tournament->cover; ?>" class="hoverable-img hoverable-img-<?php echo $tournament->id; ?>" style="display: none">
+            <img src="<?php echo $tournament->cover; ?>" style="max-width: 15%;" data-id="<?php echo $tournament->id; ?>">
+        </div>
+    </td>
+
+    <td class="tc">
+        <?php echo $tournament->location; ?>
+    </td>
+
+    <td class="tc">
+        <?php echo $tournament->start_date; ?>
+    </td>
+
+
+    <td class="tc">
+        <?php if ($game = \PixieFreakPanel\Model\Tournament::query()->game($tournament)): ?>
+            <?php echo $game->name; ?>
+        <?php endif; ?>
+    </td>
+
+    <td class="tc">
+        <?php echo \PixieFreakPanel\Model\Tournament::STATUSES[$tournament->status]; ?>
+    </td>
+
+    <td class="tc">
+        <a class="manage-t-teams btns" rel="tipsy"
+           data-id="<?php echo $tournament->id; ?>"
+           title="<?php ___('Click here to manage this tournament teams.', true) ?>">
+            <i class="fa fa-users"></i>
+        </a>
+    </td>
+
+    <td class="tc">
+        <a href="<?php route('tournament_index', true, ['bracket-id' => $tournament->id]); ?>"
+           class="manage-brackets btns" rel="tipsy"
+           title="<?php ___('Click here to manage this tournament brackets.', true) ?>">
+            <i class="fa fa-chart-line"></i>
+        </a>
+    </td>
+
+    <td class="tc">
+        <?php post_slug_builder('tournament', $tournament->slug); ?>
+
+        <a class="edit-tournament btns" rel="tipsy"
+           title="<?php ___('Click here to edit this tournament item.', true) ?>"
+           data-id="<?php echo $tournament->id; ?>">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a data-id="<?php echo $tournament->id; ?>"
+           rel="tipsy"
+           title="<?php ___('Click here to remove this tournament item.', true) ?>"
+           class="remove-tournament btns">
+            <i class="fa fa-trash"></i>
+        </a>
+    </td>
+</tr>

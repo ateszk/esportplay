@@ -1,0 +1,39 @@
+<div id="modal-team-stream" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p"><?php echo ___('Edit team Streams'); ?></p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <select class="js-example-basic-multiple input-staff" id="team-stream" name="streams[]" multiple="multiple">
+                        <?php $streams = $streams = \PixieFreakPanel\Model\Stream::query()->get(); ?>
+                        <?php if ($streams->isNotEmpty()): ?>
+
+                            <?php foreach ($streams as $stream): ?>
+
+                                <option value="<?php echo $stream->id; ?>"><?php echo $stream->title; ?></option>
+
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-team-stream"
+                   data-id="0"
+            >
+        </div>
+    </div>
+</div>

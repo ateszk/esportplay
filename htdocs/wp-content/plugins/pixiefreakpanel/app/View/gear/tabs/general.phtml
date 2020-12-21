@@ -1,0 +1,39 @@
+<section id="general" class="admin-section">
+    <form method="POST" class="footer-options-form">
+        <input type="hidden" name="task" value="general_settings">
+        <h2><?php esc_html_e('General', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <a target="_blank" href="<?php echo screenshots_path('gear-general.jpg'); ?>">
+                <?php esc_html_e('Click here', 'pixiefreakpanel'); ?>
+            </a>
+            <?php esc_html_e('to see which element you are changing', 'pixiefreakpanel'); ?>
+        </p>
+
+        <div class="fusion-separator"></div>
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('CTA Button', 'pixiefreakpanel'); ?>
+                    <p class="description">
+                        <?php esc_html_e('Here you can edit CTA Button information positioned on gear  box.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php label(___('Text')); ?>
+                    <?php settings_input('gear', 'cta.text'); ?>
+
+                    <?php label(___('Link/Url')); ?>
+                    <?php settings_input('gear', 'cta.link'); ?>
+
+                    <?php settings_checkbox('gear', 'cta.show', [___('SHOW'), ___('HIDE')]); ?>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <?php submit('gear_update'); ?>
+
+    </form>
+</section>

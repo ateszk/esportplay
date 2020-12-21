@@ -1,0 +1,134 @@
+<div id="modal-tournament" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p">
+                <?php echo ___('Create Tournament'); ?>
+            </p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Logo', true); ?></h4>
+                </div>
+                <div class="staff-member-image staff-member-image-logo each-logo">
+                    <img src="">
+                    <input type="hidden" value="" id="tournament-logo">
+                    <input type="submit" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary save-stats new-logo-image"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Cover', true); ?></h4>
+                </div>
+
+                <div class="staff-member-image staff-member-image-cover each-cover">
+                    <img src="">
+                    <input type="hidden" value="" id="tournament-cover">
+                    <input type="submit" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary save-stats new-image"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Banner', true); ?></h4>
+                </div>
+
+                <div class="staff-member-image staff-member-image-banner each-banner">
+                    <img src="">
+                    <input type="hidden" value="" id="tournament-banner">
+                    <input type="submit" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary save-stats new-image-banner"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Thumbnail', true); ?></h4>
+                </div>
+
+                <div class="staff-member-image staff-member-image-thumbnail each-thumbnail">
+                    <img src="">
+                    <input type="hidden" value="" id="tournament-thumbnail">
+                    <input type="submit" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary save-stats new-thumbnail-image"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Tournament Name', true); ?>" id="tournament-name">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Location', true); ?>" id="tournament-location">
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Start Date', true); ?></h4>
+                    </div>
+
+                    <input type="text" class="pixie-input datepicker input-staff"
+                           name="startdate"
+                           size="35"
+                           value=""
+                           id="tournament-start_date"
+                    >
+
+                    <select class="staff-select input-staff" id="tournament-game_id">
+                        <option value="0" selected=""><?php ___('Choose a Game', true); ?></option>
+	                    <?php $games = \PixieFreakPanel\Model\Game::query()->get(); ?>
+	                    <?php if ($games->isNotEmpty()): ?>
+
+                            <?php foreach ($games as $games): ?>
+                                <option value="<?php echo $games->id; ?>">
+                                    <?php echo $games->name; ?>
+                                </option>
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
+                    </select>
+
+                    <textarea class="input-staff" id="tournament-about"
+                              title="<?php ___('About'); ?>"
+                              placeholder="<?php ___('About', true); ?>"></textarea>
+
+                    <input type="text" class="input-staff" placeholder="<?php ___('Facebook', true); ?>" id="tournament-facebook">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Twitter', true); ?>" id="tournament-twitter">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Instagram', true); ?>" id="tournament-instagram">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Discord', true); ?>" id="tournament-discord">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Steam', true); ?>" id="tournament-steam">
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Stats', true); ?></h4>
+                    </div>
+                    <input type="text" class="input-staff" placeholder="<?php ___('Team Number', true); ?>" id="tournament-team_number">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Prize Pool', true); ?>" id="tournament-prize_pool">
+
+                    <input type="text" class="input-staff" placeholder="<?php ___('Random Rule Text', true); ?>" id="tournament-rr_text">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Random Rule Value', true); ?>" id="tournament-rr_value">
+
+                    <select class="staff-select input-staff" id="tournament-status">
+                        <option value="0" selected=""><?php ___('Undefined', true); ?></option>
+                        <?php foreach (\PixieFreakPanel\Model\Tournament::STATUSES as $key => $status): ?>
+                            <option value="<?php echo $key; ?>">
+                                <?php echo $status; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-tournament"
+                   data-id="0">
+        </div>
+    </div>
+</div>

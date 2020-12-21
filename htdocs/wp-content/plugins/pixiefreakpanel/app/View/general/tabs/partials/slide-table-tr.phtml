@@ -1,0 +1,38 @@
+<tr id="tr-<?php echo $slide->id; ?>">
+	<td class="tc"><?php echo $slide->id; ?></td>
+	<td class="tc">
+		<?php echo $slide->heading_text; ?>
+	</td>
+	<td class="tc">
+		<?php echo $slide->tag; ?>
+	</td>
+	<td class="tc">
+        <div class="bgForImg hoverable">
+		    <img src="<?php echo $slide->image; ?>" style="max-width: 15%;" data-id="<?php echo $slide->id; ?>">
+        </div>
+	</td>
+	<td class="tc">
+        <div class="bgForImg hoverable">
+		    <img src="<?php echo $slide->thumbnail; ?>" style="max-width: 15%;" data-id="<?php echo $slide->id; ?>">
+        </div>
+	</td>
+	<td class="tc">
+		<?php echo $slide->cta_text; ?>
+	</td>
+	<td class="tc">
+		<?php echo $slide->cta_link; ?>
+	</td>
+	<td class="tc">
+		<a class="edit-slide btns" rel="tipsy"
+		   title="<?php ___('Click here to edit this slide item.', true) ?>"
+		   data-id="<?php echo $slide->id; ?>">
+			<i class="fa fa-edit"></i>
+		</a>
+		<a data-id="<?php echo $slide->id; ?>"
+		   rel="tipsy"
+		   title="<?php ___('Click here to remove this slide item.', true) ?>"
+		   class="remove-slide btns">
+			<i class="fa fa-trash"></i>
+		</a>
+	</td>
+</tr>

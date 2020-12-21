@@ -1,0 +1,23 @@
+<td class="tdCheckbox">
+    <?php foreach (json_decode($statistics, true) as $key => $statistic): ?>
+        <div class="input-group">
+            <div class="modal-input stat-pr" data-id="<?php echo $key; ?>">
+                <div class="image-preview-holder aboutBG stats-modal-preview<?php echo $key; ?> stats-modal-preview" style="display: none;">
+                    <img class="image-preview img-preview-bnr"
+                         src="<?php echo $statistic['icon']; ?>"
+                    >
+                </div>
+                <input type="hidden" name="stats[]" value="<?php echo $statistic['icon']; ?>" id="icon-<?php echo $key; ?>" class="stats-input">
+                <input type="submit" value="<?php echo ___('Change Icon'); ?>" class="button button-primary modal-save modal-stats-btn stats-icon" data-id="<?php echo $key; ?>">
+            </div>
+
+            <div class="modal-input">
+                <?php input('text', 'stats[]', $statistic['title'], 'stats-input', ___('Title')); ?>
+            </div>
+
+            <div class="modal-input">
+                <?php input('text', 'stats[]', $statistic['label'], 'stats-input', ___('Label')); ?>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</td>

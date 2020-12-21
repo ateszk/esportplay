@@ -1,0 +1,39 @@
+<section id="social" class="admin-section">
+    <form method="POST" class="footer-options-form" action="<?php route('general_update'); ?>">
+        <input type="hidden" name="task" value="general_settings">
+
+        <h2><?php esc_html_e('Social settings', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <a target="_blank" href="<?php echo screenshots_path('p-socials.jpg'); ?>">
+                <?php esc_html_e('Click here', 'pixiefreakpanel'); ?>
+            </a>
+            <?php esc_html_e('to see which element you are changing', 'pixiefreakpanel'); ?>
+        </p>
+
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th scope="row">
+                    <p class="description" style="max-width: 100%;">
+                        <?php esc_html_e('Here you can edit/customize your Social network urls.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php settings_input('general', 'social.facebook', 'text', 'fab fa-facebook'); ?>
+                    <?php settings_input('general', 'social.twitter', 'text', 'fab fa-twitter'); ?>
+                    <?php settings_input('general', 'social.twitch', 'text', 'fab fa-twitch'); ?>
+                    <?php settings_input('general', 'social.discord', 'text', 'fab fa-discord'); ?>
+                    <?php settings_input('general', 'social.youtube', 'text', 'fab fa-youtube'); ?>
+                    <?php settings_input('general', 'social.instagram', 'text', 'fab fa-instagram'); ?>
+                    <?php settings_input('general', 'social.steam', 'text', 'fab fa-steam'); ?>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <?php submit('general_update'); ?>
+
+    </form>
+</section>

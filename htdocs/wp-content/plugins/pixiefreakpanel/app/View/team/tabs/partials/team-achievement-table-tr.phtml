@@ -1,0 +1,27 @@
+<tr id="tr-achievement-<?php echo $achievement->id; ?>">
+
+    <td class="tc"> <?php echo $achievement->id; ?> </td>
+
+    <td class="tc"> <?php echo $achievement->name; ?> </td>
+
+    <td class="tc">
+        <div class="bgForImg hoverable">
+            <img src="<?php echo $achievement->thumbnail; ?>" class="hoverable-img hoverable-img-<?php echo $achievement->id; ?>" style="display: none">
+            <img src="<?php echo $achievement->thumbnail; ?>" style="max-width: 15%;" data-id="<?php echo $achievement->id; ?>">
+        </div>
+    </td>
+
+    <td class="tc">
+        <a class="edit-achievement btns" rel="tipsy"
+           title="<?php ___('Click here to edit this achievement.', true) ?>"
+           data-id="<?php echo $achievement->id; ?>">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a data-id="<?php echo $achievement->id; ?>"
+           rel="tipsy"
+           title="<?php ___('Click here to remove this achievement.', true) ?>"
+           class="remove-achievement btns">
+            <i class="fa fa-trash"></i>
+        </a>
+    </td>
+</tr>

@@ -1,0 +1,34 @@
+<tr id="tr-<?php echo $stream->id; ?>">
+    <td class="tc"><?php echo $stream->id; ?></td>
+    <td class="tc">
+        <?php echo $stream->title; ?>
+    </td>
+    <td class="tc">
+        <?php echo $stream->subtitle; ?>
+    </td>
+    <td class="tc">
+        <div class="bgForImg hoverable">
+            <img src="<?php echo $stream->thumbnail; ?>" class="hoverable-img hoverable-img-<?php echo $stream->id; ?>" style="display: none">
+            <img src="<?php echo $stream->thumbnail; ?>" style="max-width: 15%;" data-id="<?php echo $stream->id; ?>">
+        </div>
+    </td>
+    <td class="tc">
+        <?php echo $stream->is_online == 1 ? ___('Online', true) : ___('Offline', false); ?>
+    </td>
+    <!--<td class="tc">
+        <?php /*echo $stream->view ? $stream->view .' '. ___(' Views') : 0 .' '. ___(' Views'); */?>
+    </td>-->
+    <td class="tc">
+        <a class="edit-stream btns" rel="tipsy"
+           title="<?php ___('Click here to edit this stream item.', true) ?>"
+           data-id="<?php echo $stream->id; ?>">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a data-id="<?php echo $stream->id; ?>"
+           rel="tipsy"
+           title="<?php ___('Click here to remove this stream item.', true) ?>"
+           class="remove-stream btns">
+            <i class="fa fa-trash"></i>
+        </a>
+    </td>
+</tr>

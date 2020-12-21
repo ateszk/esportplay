@@ -1,0 +1,30 @@
+<script>
+    jQuery(document).ready(function() {
+        DataTable('game-table');
+
+        WpMedia('.pick12', '#game-thumbnail', '.s12 > img');
+        WpMedia('.pick23', '#game-cover', '.s23 > img');
+
+        ModalResolver()
+            .setTableSelector('#game-table')
+            .setModalSelector('#modal-game')
+            .setInputPrefix('#game-')
+            .setCreateSelector('#add-game')
+            .setEditSelector('.edit-game')
+
+            .setImageResourceId('thumbnail')
+            .setImageResourceId('cover')
+
+            .setRemoveSelector('.remove-game')
+            .setSaveSelector('.save-game')
+            .setPrimaryKeySelector('gameId')
+            .setCreateEndpoint('<?php echo route('game_create') ;?>')
+            .setEditEndpoint('<?php echo route('game_get') ;?>')
+            .setUpdateEndpoint('<?php echo route('game_update') ;?>')
+            .setRemoveEndpoint('<?php echo route('game_remove'); ?>')
+            .setTableRowSelector('#tr-')
+            .setAccessorMap(['name', 'thumbnail', 'cover'])
+            .init()
+        ;
+    });
+</script>

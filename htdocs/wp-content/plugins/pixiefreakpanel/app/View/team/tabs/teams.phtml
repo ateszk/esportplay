@@ -1,0 +1,46 @@
+<style>main.sections {min-height: 1400px;}</style>
+<section id="teams" class="admin-section">
+    <form method="POST" class="footer-options-form">
+        <input type="hidden" name="task" value="general_settings">
+        <h2><?php esc_html_e('Teams', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <input type="button" class="button button-secondary btn-right" value="<?php ___('Add Team', true); ?>" id="add-team">
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table id="datatableTeam" class="widefat fixed" cellspacing="0">
+            <thead>
+            <tr>
+                <th class="tc"><?php ___('ID', true) ?></th>
+                <th class="tc"><?php ___('Name', true) ?></th>
+                <th class="tc"><?php ___('Game', true) ?></th>
+                <th class="tc"><?php ___('Logo', true) ?></th>
+                <th class="tc"><?php ___('Country', true) ?></th>
+                <th class="tc"><?php ___('Statistic/Achievements', true) ?></th>
+                <th class="tc"><?php ___('Streams/Players', true) ?></th>
+                <th class="tc"><?php ___('Action', true) ?></th>
+            </tr>
+            </thead>
+            <tbody class="sortable sortableTeam">
+            <?php if ($teams->isNotEmpty()): ?>
+
+                <?php foreach ($teams as $team): ?>
+
+                    <?php include (__DIR__ . '/partials/team-table-tr.phtml'); ?>
+
+                <?php endforeach; ?>
+
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </form>
+</section>
+
+<?php include(__DIR__ . '/partials/team-modal.phtml'); ?>
+<?php include(__DIR__ . '/partials/team-stats-modal.phtml'); ?>
+<?php include(__DIR__ . '/partials/team-stream-modal.phtml'); ?>
+<?php include(__DIR__ . '/partials/team-achievements-modal.phtml'); ?>
+
+<?php scripts(__DIR__, 'general'); ?>

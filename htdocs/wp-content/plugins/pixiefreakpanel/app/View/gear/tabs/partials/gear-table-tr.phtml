@@ -1,0 +1,39 @@
+<tr id="tr-<?php echo $gear->id; ?>">
+    <td class="tc"><?php echo $gear->id; ?></td>
+    <td class="tc">
+        <?php echo $gear->name; ?>
+    </td>
+    <td class="tc">
+        <?php echo \PixieFreakPanel\Model\Gear::TYPES[$gear->type]; ?>
+    </td>
+    <td class="tc">
+        <div class="bgForImg hoverable">
+            <img src="<?php echo $gear->image; ?>" class="hoverable-img hoverable-img-<?php echo $gear->id; ?>" style="display: none">
+            <img src="<?php echo $gear->image; ?>" style="max-width: 15%;" data-id="<?php echo $gear->id; ?>">
+        </div>
+    </td>
+    <td class="tc">
+        <?php echo $gear->link; ?>
+    </td>
+    <td class="tc">
+        <?php echo (bool) $gear->recommended ? ___('Yes', true) : ___('No', true); ?>
+    </td>
+    <!--<td class="tc">
+                                <a href="<?php /*echo $gear->url; */?>">
+                                    <?php /*echo $gear->url; */?>
+                                </a>
+                            </td>-->
+    <td class="tc">
+        <a class="edit-gear btns" rel="tipsy"
+           title="<?php ___('Click here to edit this gear item.', true) ?>"
+           data-id="<?php echo $gear->id; ?>">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a data-id="<?php echo $gear->id; ?>"
+           rel="tipsy"
+           title="<?php ___('Click here to remove this gear item.', true) ?>"
+           class="remove-gear btns">
+            <i class="fa fa-trash"></i>
+        </a>
+    </td>
+</tr>

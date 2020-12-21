@@ -1,0 +1,98 @@
+<section id="slider" class="admin-section">
+	<form method="POST" class="footer-options-form">
+		<input type="hidden" name="task" value="general_settings">
+		<h2><?php esc_html_e('Slider', 'pixiefreakpanel'); ?></h2>
+		<p class="demolink">
+			<span class="spliter">|</span>
+			<input type="button" class="button button-secondary btn-right" value="<?php ___('Add Slide Item', true); ?>" id="add-slide">
+		</p>
+
+		<div class="fusion-separator"></div>
+
+		<table id="datatableSlider" class="widefat fixed" cellspacing="0">
+			<thead>
+			<tr>
+				<th class="tc"><?php ___('ID', true) ?></th>
+				<th class="tc"><?php ___('Heading', true) ?></th>
+				<th class="tc"><?php ___('Tag', true) ?></th>
+				<th class="tc"><?php ___('Image', true) ?></th>
+				<th class="tc"><?php ___('Thumbnail', true) ?></th>
+				<th class="tc"><?php ___('CTA Text', true) ?></th>
+				<th class="tc"><?php ___('CTA Link', true) ?></th>
+				<th class="tc"><?php ___('Action', true) ?></th>
+			</tr>
+			</thead>
+			<tbody class="sortable sortableSlider">
+			<?php if ($slides->isNotEmpty()): ?>
+
+				<?php foreach ($slides as $slide): ?>
+
+					<?php include (__DIR__ . '/partials/slide-table-tr.phtml'); ?>
+
+				<?php endforeach; ?>
+
+			<?php endif; ?>
+			</tbody>
+		</table>
+	</form>
+</section>
+
+<div id="modal-slide" class="modal">
+	<div class="modal-content medium">
+		<div class="modal-header">
+			<span class="close">&times;</span>
+			<p class="modal-header-p">
+				<?php echo ___('Create Slide'); ?>
+			</p>
+		</div>
+		<div class="modal-body">
+			<div class="staff-member">
+				<div class="separator-text">
+					<h4 class="st4"><?php ___('Image', true); ?></h4>
+				</div>
+
+				<div class="staff-member-image staff-member-image-main each-image">
+					<img src="">
+					<input type="hidden" value="" id="slide-image">
+					<input type="submit" name="submitBtn"
+					       value="<?php echo ___('Choose image'); ?>"
+					       class="button button-primary save-stats new-image"
+					>
+				</div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Thumbnails', true); ?></h4>
+                </div>
+
+				<div class="staff-member-image staff-member-image-thumbnail each-thumbnail">
+					<img src="">
+					<input type="hidden" value="" id="slide-thumbnail">
+					<input type="submit" name="submitBtn"
+					       value="<?php echo ___('Choose image'); ?>"
+					       class="button button-primary save-stats new-thumbnail-image"
+					>
+				</div>
+
+				<div class="separator-text">
+					<h4 class="st4"><?php ___('Information', true); ?></h4>
+				</div>
+
+				<div class="input-groups">
+					<input type="text" class="input-staff" placeholder="<?php ___('Heading', true); ?>" id="slide-heading_text">
+					<input type="text" class="input-staff" placeholder="<?php ___('Tag', true); ?>" id="slide-tag">
+					<input type="text" class="input-staff" placeholder="<?php ___('CTA Text', true); ?>" id="slide-cta_text">
+					<input type="text" class="input-staff" placeholder="<?php ___('CTA Link', true); ?>" id="slide-cta_link">
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<input type="submit"
+			       name="submitBtn"
+			       value="<?php echo ___('SAVE'); ?>"
+			       class="button button-primary save-slide"
+			       data-id="0">
+		</div>
+	</div>
+</div>
+
+<?php scripts(__DIR__, 'slider'); ?>

@@ -1,0 +1,26 @@
+<section id="brackets" class="admin-section">
+    <form method="POST" class="footer-options-form">
+        <input type="hidden" name="task" value="general_settings">
+        <h2><?php esc_html_e('Brackets', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <a href="<?php echo route('tournament_index') . '#tournaments'; ?>">
+                <input type="button" class="button button-secondary btn-right" value="<?php ___('Go Back', true); ?>"  style="margin-right: 10px;">
+            </a>
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <section class="brackets page-bg">
+            <div class="container">
+                <div class="bracket-wrapper">
+                    <div class="panzoom-elements"></div>
+                </div>
+            </div>
+        </section>
+        <input type="button" class="button button-secondary btn-right reset-bracket" value="<?php ___('Reset ', true); ?>">
+        <input type="button" class="button button-secondary btn-right save-bracket" value="<?php ___('Save', true); ?>" style="margin-right: 10px;">
+    </form>
+</section>
+
+<?php scripts(__DIR__, 'brackets'); ?>

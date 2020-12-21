@@ -1,0 +1,40 @@
+<section id="routes" class="admin-section">
+    <form method="POST" class="footer-options-form" action="<?php route('route_update'); ?>">
+        <input type="hidden" name="task" value="general_settings">
+        <h2><?php esc_html_e('Dynamic Routes', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <a target="_blank" href="<?php echo screenshots_path('p-routes.jpg'); ?>">
+                <?php esc_html_e('Click here', 'pixiefreakpanel'); ?>
+            </a>
+            <?php esc_html_e('to see which element you are changing', 'pixiefreakpanel'); ?>
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('Available Routes', 'pixiefreakpanel'); ?>
+                    <p class="description">
+                        <?php esc_html_e('Here you can edit available theme routes.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php foreach ($settings = pixiefreak_settings('routes')->get('routes') as $routeName => $args): ?>
+                        <?php label(___(ucfirst($routeName) . ' URL prefix')); ?>
+                        <input name="routes[<?php echo $routeName; ?>]"
+                               value="<?php echo pixiefreak_settings('routes')->get('routes')[$routeName]['route']; ?>"
+                               placeholder="<?php echo ucfirst($routeName) . ' Route'; ?>"
+                        >
+                    <?php endforeach; ?>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <?php submit('route_update'); ?>
+
+    </form>
+</section>

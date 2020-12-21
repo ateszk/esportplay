@@ -1,0 +1,15 @@
+#customize-control-clpt_custom_css .customize-control-title {
+    display: none;
+}
+#customize-control-clpt_custom_css {
+    margin-left: -12px;
+    width: 299px;
+    margin-bottom: -12px;
+}
+#customize-control-clpt_custom_css textarea{
+    border-left: 0;
+    border-right: 0;
+    height: -webkit-calc( 100vh - 285px );
+    height: calc( 100vh - 285px );
+    resize: none;
+}

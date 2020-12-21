@@ -1,0 +1,52 @@
+<section id="general" class="admin-section">
+    <form method="POST" class="footer-options-form" action="<?php route('match_update'); ?>">
+        <input type="hidden" name="task" value="general_settings">
+        <h2><?php esc_html_e('General settings', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <a target="_blank" href="<?php echo screenshots_path('match-general.jpg'); ?>">
+                <?php esc_html_e('Click here', 'pixiefreakpanel'); ?>
+            </a>
+            <?php esc_html_e('to see which element you are changing', 'pixiefreakpanel'); ?>
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('Cover', 'pixiefreakpanel'); ?>
+                    <p class="description">
+                        <?php esc_html_e('Here you change/add match cover.', 'pixiefreakpanel'); ?>
+                    <div class="image-preview-holder aboutBG">
+                        <img class="image-preview img-preview-bnr" src="<?php echo pixiefreak_settings('match')->get('banner_image'); ?>">
+                    </div>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <input type="hidden" name="match_banner_image" value="" id="banner_image">
+                    <input type="button" class="button button-secondary" value="<?php echo ___('SELECT BANNER IMAGE'); ?>" id="select-banner-image">
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('Header Title/Subtitle', 'pixiefreakpanel'); ?>
+                    <p class="description" style="max-width: 100%;">
+                        <?php esc_html_e('Here you can edit/customize header Title/Subtitle text.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php settings_input('match', 'title', 'text', '', ___('Title')); ?>
+                    <?php settings_input('match', 'subtitle', 'text', '', ___('Subtitle')); ?>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <?php submit('match_update'); ?>
+
+    </form>
+</section>
+
+<?php scripts(__DIR__, 'general'); ?>

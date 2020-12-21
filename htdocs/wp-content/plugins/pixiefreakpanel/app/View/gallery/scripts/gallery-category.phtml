@@ -1,0 +1,22 @@
+<script>
+    jQuery(document).ready(function() {
+        DataTable('datatableCategory');
+        ModalResolver()
+            .setTableSelector('#datatableCategory')
+            .setModalSelector('#modal-category')
+            .setInputPrefix('#category-')
+            .setCreateSelector('#add-category')
+            .setEditSelector('.edit-category')
+            .setRemoveSelector('.remove-category')
+            .setSaveSelector('.save-category')
+            .setPrimaryKeySelector('categoryId')
+            .setCreateEndpoint('<?php echo route('gallery_createCategory') ;?>')
+            .setEditEndpoint('<?php echo route('gallery_getCategory') ;?>')
+            .setUpdateEndpoint('<?php echo route('gallery_updateCategory') ;?>')
+            .setRemoveEndpoint('<?php echo route('gallery_removeCategory'); ?>')
+            .setTableRowSelector('#tr-category-')
+            .setAccessorMap(['name'])
+            .init()
+        ;
+    });
+</script>

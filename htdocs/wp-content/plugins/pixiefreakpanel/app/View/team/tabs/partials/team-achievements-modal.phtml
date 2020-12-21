@@ -1,0 +1,41 @@
+<div id="modal-team-achievements" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p"><?php echo ___('Edit team achievements'); ?></p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <select class="js-example-basic-multiple input-staff" id="team-achievements" name="achievements[]" multiple="multiple">
+                        <?php $achievements = \PixieFreakPanel\Model\Achievement::query()->get(); ?>
+                        <?php if ($achievements->isNotEmpty()): ?>
+
+                            <?php foreach ($achievements as $achievement): ?>
+
+                                <option value="<?php echo $achievement->id; ?>">
+                                    <?php echo ucfirst($achievement->name); ?>
+                                </option>
+
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-team-achievements"
+                   data-id="0"
+            >
+        </div>
+    </div>
+</div>

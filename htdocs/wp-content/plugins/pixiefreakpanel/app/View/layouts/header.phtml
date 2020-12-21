@@ -1,0 +1,51 @@
+<?php if (version_compare(PHP_VERSION, '5.6.0') < 0): ?>
+<div id="php-error" class="phpError settings-error notice pushState">
+    <p><strong>Minimum required PHP version: >= 5.6.0</strong></p>
+</div>
+<?php endif; ?>
+<?php if (has_notification($notification)): ?>
+    <div id="setting-error-settings_updated" class="updated settings-error notice is-dismissible pushState">
+        <p><strong><?php echo $notification; ?> </strong></p>
+        <button type="button" class="notice-dismiss">
+            <span class="screen-reader-text"><?php esc_html_e('Dismiss this notice.', 'pixiefreakpanel') ?></span>
+        </button>
+    </div>
+
+    <?php notification_push_state_js(); ?>
+
+<?php endif ;?>
+
+<header class="admin-header">
+    <div class="logo-section">
+        <img src="<?php echo assets('assets/admin/images/panel_logo.png'); ?>" class="logo-img" alt="Shape the gaming"/>
+    </div>
+    <div class="admin-infobar">
+        <section class="links">
+            <div class="more-info">
+                <a href="<?php echo esc_url('http://themes.pixiesquad.com/') ?>"
+                   target="_blank" class="support-link">
+                    <?php esc_html_e('Get more themes', 'pixiefreakpanel') ?>
+                </a>
+
+                <a href="<?php echo esc_url('https://discord.gg/6njhTNg') ?>"
+                   target="_blank"
+                   class="cta-discord"
+                >
+                    <i class="fab fa-discord"></i>
+                    <?php esc_html_e('Join us on discord', 'pixiefreakpanel') ?>
+                </a>
+            </div>
+        </section>
+    </div>
+</header>
+
+<div class="main-content">
+    <section class="sections-pick">
+        <ul class="admin-pick-list">
+
+            <?php include_once (__DIR__ . '/../'.$sidebar.'/sidebar/' .$sidebar. '.phtml'); ?>
+
+        </ul>
+    </section>
+
+    <main class="sections">

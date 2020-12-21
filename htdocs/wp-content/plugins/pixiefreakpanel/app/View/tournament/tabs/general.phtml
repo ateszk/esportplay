@@ -1,0 +1,104 @@
+<section id="general" class="admin-section">
+    <form method="POST" class="footer-options-form" action="<?php route('tournament_update'); ?>">
+        <input type="hidden" name="task" value="general_settings">
+        <h2><?php esc_html_e('General Settings', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <a target="_blank" href="<?php echo screenshots_path('tournament-general.jpg'); ?>">
+                <?php esc_html_e('Click here', 'pixiefreakpanel'); ?>
+            </a>
+            <?php esc_html_e('to see which element you are changing', 'pixiefreakpanel'); ?>
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th colspan="2">
+                    <h3>
+                        <?php esc_html_e('Single Tournament Page Settings', 'pixiefreakpanel'); ?>
+                    </h3>
+                    <p class="description" style="max-width: 100%;">
+                        <?php esc_html_e('General settings for single tournament page item.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+            </tr>
+
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('CTA Left', 'pixiefreakpanel'); ?>
+                    <p class="description">
+                        <?php esc_html_e('Here you can customize Tournament CTA left button.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php settings_input('tournament', 'cta_left.text', 'text', '', ___('CTA Left Text')); ?>
+                    <?php settings_input('tournament', 'cta_left.link', 'text', '', ___('CTA Left Link')); ?>
+                    <?php settings_checkbox('tournament', 'cta_left.show', ['SHOW', 'HIDE']); ?>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('CTA Right', 'pixiefreakpanel'); ?>
+                    <p class="description">
+                        <?php esc_html_e('Here you can customize Tournament CTA right button.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php settings_input('tournament', 'cta_right.text', 'text', '', ___('CTA Right Text')); ?>
+                    <?php settings_input('tournament', 'cta_right.link', 'text', '', ___('CTA Right Link')); ?>
+                    <?php settings_checkbox('tournament', 'cta_right.show', ['SHOW', 'HIDE']); ?>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="form-table">
+            <tbody>
+                <tr>
+                    <th colspan="2">
+                        <h3>
+                            <?php esc_html_e('Tournament List Page Settings', 'pixiefreakpanel'); ?>
+                        </h3>
+                        <p class="description" style="max-width: 100%;">
+                            <?php esc_html_e('General settings for tournament list page item.', 'pixiefreakpanel'); ?>
+                        </p>
+                    </th>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <?php esc_html_e('Header Background/Cover', 'pixiefreakpanel'); ?>
+                        <p class="description">
+                            <?php esc_html_e('Here you change/add tournament header background.', 'pixiefreakpanel'); ?>
+                            <div class="image-preview-holder aboutBG">
+                                <img class="image-preview img-preview-bnr" src="<?php echo pixiefreak_settings('tournaments')->get('banner_image'); ?>">
+                            </div>
+                        </p>
+                    </th>
+                    <td class="tdCheckbox">
+                        <input type="hidden" name="tournaments_banner_image" value="" id="banner_image">
+                        <input type="button" class="button button-secondary" value="<?php echo ___('SELECT BANNER IMAGE'); ?>" id="select-banner-image">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <?php esc_html_e('Title/Subtitle', 'pixiefreakpanel'); ?>
+                        <p class="description">
+                            <?php esc_html_e('Here you can customize Tournament list title/subtitle.', 'pixiefreakpanel'); ?>
+                        </p>
+                    </th>
+                    <td class="tdCheckbox">
+                        <?php settings_input('tournaments', 'title', 'text', '', ___('Title')); ?>
+                        <?php settings_input('tournaments', 'subtitle', 'text', '', ___('Subtitle')); ?>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <?php submit('tournament_update'); ?>
+
+    </form>
+</section>
+
+<?php scripts(__DIR__, 'general'); ?>

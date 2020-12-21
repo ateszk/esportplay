@@ -1,0 +1,92 @@
+<section id="footer" class="admin-section">
+    <form method="POST" class="footer-options-form" action="<?php route('general_update'); ?>">
+        <input type="hidden" name="task" value="general_settings">
+
+        <h2><?php esc_html_e('Footer settings', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <a target="_blank" href="<?php echo screenshots_path('p-footer.jpg'); ?>">
+                <?php esc_html_e('Click here', 'pixiefreakpanel'); ?>
+            </a>
+            <?php esc_html_e('to see which element you are changing', 'pixiefreakpanel'); ?>
+        </p>
+
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('Copyright Text', 'pixiefreakpanel'); ?>
+                    <p class="description">
+                        <?php esc_html_e('Here you can edit footer/copyright text.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php settings_input('general', 'copyright'); ?>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('Show Copyright Text', 'pixiefreakpanel'); ?>
+                    <p class="description">
+                        <?php esc_html_e('Here you can hide the copyright text from from the Footer.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php settings_checkbox('general', 'show_copyright'); ?>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('Show Socials', 'pixiefreakpanel'); ?>
+                    <p class="description">
+                        <?php esc_html_e('Here you can hide the social icons from the Footer.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php settings_checkbox('general', 'show_socials_footer'); ?>
+                </td>
+            </tr>
+
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('Footer Information', 'pixiefreakpanel'); ?>
+                    <p class="description">
+                        <?php esc_html_e('Here you can about footer information.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php label(___('Footer First')); ?>
+                    <?php settings_input('general', 'get_in_touch_1.icon', 'text', '', 'Icon'); ?>
+                    <?php settings_input('general', 'get_in_touch_1.title', 'text', '', 'Title'); ?>
+                    <?php settings_input('general', 'get_in_touch_1.subtitle', 'text', '', 'Subtitle'); ?>
+                    <?php settings_checkbox('general', 'get_in_touch_1.show', [___('SHOW'), ___('HIDE')]); ?>
+
+                    <hr/>
+                    <?php label(___('Footer Second')); ?>
+                    <?php settings_input('general', 'get_in_touch_2.icon', 'text', '', 'Icon'); ?>
+                    <?php settings_input('general', 'get_in_touch_2.title', 'text', '', 'Title'); ?>
+                    <?php settings_input('general', 'get_in_touch_2.subtitle', 'text', '', 'Subtitle'); ?>
+                    <?php settings_checkbox('general', 'get_in_touch_2.show', [___('SHOW'), ___('HIDE')]); ?>
+
+                    <hr/>
+                    <?php label(___('Footer Third')); ?>
+                    <?php settings_input('general', 'get_in_touch_3.icon', 'text', '', 'Icon'); ?>
+                    <?php settings_input('general', 'get_in_touch_3.title', 'text', '', 'Title'); ?>
+                    <?php settings_input('general', 'get_in_touch_3.subtitle', 'text', '', 'Subtitle'); ?>
+                    <?php settings_checkbox('general', 'get_in_touch_3.show', [___('SHOW'), ___('HIDE')]); ?>
+
+                    <hr/>
+                    <?php label(___('Footer Fourth')); ?>
+                    <?php settings_input('general', 'get_in_touch_4.icon', 'text', '', 'Icon'); ?>
+                    <?php settings_input('general', 'get_in_touch_4.title', 'text', '', 'Title'); ?>
+                    <?php settings_input('general', 'get_in_touch_4.subtitle', 'text', '', 'Subtitle'); ?>
+                    <?php settings_checkbox('general', 'get_in_touch_4.show', [___('SHOW'), ___('HIDE')]); ?>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <?php submit('general_update'); ?>
+
+    </form>
+</section>

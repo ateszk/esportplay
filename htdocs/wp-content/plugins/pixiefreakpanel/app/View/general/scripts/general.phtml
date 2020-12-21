@@ -1,0 +1,65 @@
+<script>
+    jQuery(document).ready(function() {
+        $('.sectionTable').sortable({
+            placeholder: "ui-state-highlight",
+            revert: true,
+            update: function (e) {
+                var items = $('.sectionTable').sortable("toArray", {key: 'item[]'}),
+                    data = {
+                        'action': '<?php echo route('general_update', false);?>',
+                        'sortedIds': items,
+                        'page': '<?php echo route('general_update', false);?>',
+                        'trigger': 'sortable'
+                    };
+
+                // We can also pass the url value separately from ajaxurl for front end AJAX implementations
+                $.post('<?php echo route('general_update');?>', data, function (response) {
+                    console.log('Saved');
+                });
+            },
+
+            helper: 'clone'
+        });
+
+        WpMedia('#default_background-bnr-img', '#general-default_background', '.default_background > img');
+        WpMedia('#notfound_background-bnr-img', '#general-notfound_background', '.notfound_background > img');
+
+
+        $('.sectionBox').on('click', function () {
+            var self = $(this);
+            if (self.hasClass('sectionHidden')) {
+                self.removeClass('sectionHidden');
+                self.find('p').fadeOut();
+            } else {
+                self.addClass('sectionHidden');
+                self.append(
+                    $('<p class="hidden-text"><?php esc_html_e('(HIDDEN)', 'pixiefreakpanel'); ?></p>')
+                        .hide()
+                        .fadeIn()
+                        .css('display', 'inline-block')
+                );
+            }
+
+            var hiddenElements = [];
+            $('.sectionHidden').each(function () {
+                hiddenElements.push($(this).data('id'));
+            });
+
+            var data = {
+                'action': '<?php echo route('general_update', false);?>',
+                'hiddenElements': hiddenElements,
+                'page': '<?php echo route('general_update', false);?>',
+                'trigger': 'showable'
+            };
+
+            $.post('<?php echo route('general_update');?>', data, function (response) {});
+        });
+
+
+        let pickSelectorsSecond = ['1', '2', '3', '4'];
+        for (var selector of pickSelectorsSecond) {
+            $('input[name="general_get_in_touch_'+selector+'[icon]"]').iconpicker({ placement: 'top' });
+        }
+        $('.iconpicker-item').on('click', (e) => { e.preventDefault(e); });
+    });
+</script>

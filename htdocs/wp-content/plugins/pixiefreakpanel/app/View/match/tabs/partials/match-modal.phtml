@@ -1,0 +1,123 @@
+<div id="modal-match" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p">
+                <?php echo ___('Create Match'); ?>
+            </p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Game', true); ?></h4>
+                </div>
+                <div class="input-groups">
+                    <select class="staff-select input-staff" id="match-game_id">
+                        <option value="0" selected=""><?php ___('Select Game', true); ?></option>
+                        <?php $games = \PixieFreakPanel\Model\Game::query()->get(); ?>
+                        <?php if ($games->isNotEmpty()): ?>
+
+                            <?php foreach ($games as $games): ?>
+                                <option value="<?php echo $games->id; ?>">
+                                    <?php echo $games->name; ?>
+                                </option>
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
+                    </select>
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Tournament', true); ?></h4>
+                    </div>
+                    <select class="staff-select input-staff" id="match-tournament_id">
+                        <option value="0" selected=""><?php ___('Select tournament', true); ?></option>
+                        <?php $tournaments = \PixieFreakPanel\Model\Tournament::query()->get(); ?>
+                        <?php if ($tournaments->isNotEmpty()): ?>
+
+                            <?php foreach ($tournaments as $tournament): ?>
+                                <option value="<?php echo $tournament->id; ?>">
+                                    <?php echo $tournament->name; ?>
+                                </option>
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
+                    </select>
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Start Date', true); ?></h4>
+                    </div>
+                    <input type="text" class="pixie-input datepicker input-staff"
+                           name="startdate"
+                           size="35"
+                           value=""
+                           id="match-start_date"
+                    >
+
+                    <select class="staff-select input-staff" id="match-status">
+                        <option value="0" selected=""><?php ___('Select Match Status', true); ?></option>
+                        <?php foreach (\PixieFreakPanel\Model\Match::STATUSES as $key => $status): ?>
+                            <option value="<?php echo $key; ?>">
+                                <?php echo $status; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Type', true); ?></h4>
+                    </div>
+                    <select class="staff-select input-staff" id="match-type">
+                        <option value="0" selected=""><?php ___('Select Match Type', true); ?></option>
+                        <?php foreach (\PixieFreakPanel\Model\Match::TYPES as $key => $type): ?>
+                            <option value="<?php echo $key; ?>">
+                                <?php echo $type; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Teams', true); ?></h4>
+                    </div>
+                    <select class="staff-select input-staff" id="match-team_a_id">
+                        <option value="0" selected=""><?php ___('Select Team A', true); ?></option>
+                        <?php foreach ($teams = \PixieFreakPanel\Model\Team::query()->get() as $key => $team): ?>
+                            <option value="<?php echo $team->id; ?>">
+                                <?php echo $team->name; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <select class="staff-select input-staff" id="match-team_b_id">
+                        <option value="0" selected=""><?php ___('Select Team B', true); ?></option>
+                        <?php foreach ($teams as $key => $team): ?>
+                            <option value="<?php echo $team->id; ?>">
+                                <?php echo $team->name; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <input type="text" class="input-staff" placeholder="<?php ___('Team A Result', true); ?>" id="match-team_a_result">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Team B Result', true); ?>" id="match-team_b_result">
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Other', true); ?></h4>
+                    </div>
+                    <input type="text" class="input-staff" placeholder="<?php ___('CTA Match Text', true); ?>" id="match-cta_match_text">
+                    <input type="text" class="input-staff" placeholder="<?php ___('CTA Match Link', true); ?>" id="match-cta_match_link">
+                    <select class="staff-select input-staff" id="match-stream_id">
+                        <option value="0" selected=""><?php ___('Select Stream', true); ?></option>
+                        <?php foreach ($streams = \PixieFreakPanel\Model\Stream::query()->get() as $key => $stream): ?>
+                            <option value="<?php echo $stream->id; ?>">
+                                <?php echo $stream->title; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-match"
+                   data-id="0">
+        </div>
+    </div>
+</div>

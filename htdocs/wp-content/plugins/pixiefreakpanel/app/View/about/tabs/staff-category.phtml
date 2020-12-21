@@ -1,0 +1,72 @@
+<section id="staffcategory" class="admin-section">
+    <form method="POST" class="footer-options-form">
+        <h2><?php esc_html_e('Staff Categories', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter"></span>
+
+            <input type="button" class="button button-secondary btn-right" value="<?php ___('Add Category', true); ?>" id="add-category">
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table id="datatableCategory" class="widefat fixed" cellspacing="0">
+            <thead>
+            <tr>
+                <th class="tc"><?php ___('ID', true) ?></th>
+                <th class="tc"><?php ___('Name', true) ?></th>
+                <th class="tc"><?php ___('Action', true) ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php if ($categories->isNotEmpty()): ?>
+
+                <?php foreach ($categories as $category): ?>
+
+                    <tr id="tr-category-<?php echo $category->id; ?>">
+                        <td class="tc"><?php echo $category->id; ?></td>
+                        <td class="tc" id="category-name-<?php echo $category->id; ?>"><?php echo $category->name; ?></td>
+                        <td class="tc">
+                            <a class="edit-staff-category btns" rel="tipsy"
+                               title="<?php ___('Click here to edit this staff category.', true) ?>"
+                               data-id="<?php echo $category->id; ?>">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a data-id="<?php echo $category->id; ?>" rel="tipsy" title="<?php ___('Click here to remove this staff category.', true) ?>"
+                               class="remove-member-category btns">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                <?php endforeach; ?>
+
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </form>
+</section>
+
+
+
+<div id="modal-category" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p"><?php echo ___('Create new category'); ?></p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Add new Category', true); ?></h4>
+                </div>
+                <input type="text" class="input-staff" placeholder="<?php ___('Category name', true); ?>" id="category-name">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="submitBtn" value="<?php echo ___('Save'); ?>"
+                   class="button button-primary modal-save" data-id="0">
+        </div>
+    </div>
+</div>
+
+<?php scripts(__DIR__ , 'staff-category'); ?>

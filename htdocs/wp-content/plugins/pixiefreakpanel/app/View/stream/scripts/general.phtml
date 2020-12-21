@@ -1,0 +1,50 @@
+<script>
+    jQuery(document).ready(function() {
+        WpMedia('#select-banner-image', '#banner-image', '.aboutBG > img');
+
+        var saveAPIButton = $('.save-api');
+        var modal = $('#modal-stream-api');
+        $('.button-stream').on('click', function(e) {
+            preventAll(e);
+            var type = saveAPIButton.attr('data-type', $(this).attr('data-type'));
+            $('#stream-api').val($(this).data('api')).attr('data-api', $(this).data('api'));
+            modal.fadeIn();
+        });
+
+        saveAPIButton.on('click', function(e) {
+            preventAll(e);
+
+            var dataType = $(this).attr('data-type'),
+                key = $('#stream-api').val()
+            ;
+
+            if (key.length <= 0) {
+                alert(dataType.charAt(0).toUpperCase() + dataType.slice(1) + '<?php ___(' API key is not valid.', true); ?>');
+                return;
+            }
+
+            var data = {
+                'action': '<?php echo route('stream_validateApi', false);?>',
+                'page': '<?php echo route('stream_validateApi', false);?>',
+                'network': $(this).attr('data-type'),
+                'api': $('#stream-api').val()
+            };
+
+            var $context = $(this);
+            $.post('<?php echo route('stream_validateApi');?>', data, function (response) {
+                var resp = getJsonResponse(response);
+                if (resp[0] === 'invalid') {
+                    alert('<?php ___(' API key is not valid.', true); ?>');
+                    $('.btn-' + $(this).attr('data-type')).val('<?php ___('Connect', true) ?>');
+                    modal.fadeOut();
+                }
+
+                var button = $('.btn-' + $context.attr('data-type'));
+                button.val('<?php ___('Connected', true) ?>');
+                button.attr('data-api', data.api);
+                alert('Successfully connected to API.');
+                modal.fadeOut();
+            });
+        });
+    });
+</script>

@@ -1,0 +1,39 @@
+<section id="groups" class="admin-section">
+    <form method="POST" class="footer-options-form" action="<?php route('tournament_update'); ?>">
+        <input type="hidden" name="task" value="general_settings">
+        <h2><?php esc_html_e('Groups', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <input type="button" class="button button-secondary btn-right" value="<?php ___('Add Group', true); ?>" id="add-group">
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table id="datatableTournamentGroup" class="widefat fixed" cellspacing="0">
+            <thead>
+            <tr>
+                <th class="tc"><?php ___('ID', true) ?></th>
+                <th class="tc"><?php ___('Name', true) ?></th>
+                <th class="tc"><?php ___('Tournament', true) ?></th>
+                <th class="tc"><?php ___('Team Count', true) ?></th>
+                <th class="tc"><?php ___('Action', true) ?></th>
+            </tr>
+            </thead>
+            <tbody class="sortable sortableGroup">
+            <?php if ($tournamentGroups->isNotEmpty()): ?>
+
+                <?php foreach ($tournamentGroups as $tournamentGroup): ?>
+
+                    <?php include (__DIR__ . '/partials/tournament-group-table-tr.phtml'); ?>
+
+                <?php endforeach; ?>
+
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </form>
+</section>
+
+<?php include_once (__DIR__ . '/partials/tournament-group-modal.phtml'); ?>
+
+<?php scripts(__DIR__, 'groups'); ?>

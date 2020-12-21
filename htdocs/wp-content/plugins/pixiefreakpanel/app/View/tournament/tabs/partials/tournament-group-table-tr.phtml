@@ -1,0 +1,35 @@
+<tr id="tr-group-<?php echo $tournamentGroup->id; ?>">
+
+    <td class="tc"><?php echo $tournamentGroup->id; ?></td>
+
+    <td class="tc">
+        <?php echo $tournamentGroup->name; ?>
+    </td>
+
+    <td class="tc">
+        <?php echo \PixieFreakPanel\Model\TournamentGroup::query()->tournament($tournamentGroup)->name; ?>
+    </td>
+
+    <td class="tc">
+        <?php echo \PixieFreakPanel\Model\TournamentGroup::query()->team($tournamentGroup)->count(); ?>
+    </td>
+
+    <td class="tc">
+        <a href="<?php route('tournament_index', true, ['tournament-id' => $tournamentGroup->id]); ?>"
+           class="manage-teams btns" rel="tipsy"
+           title="<?php ___('Click here to manage this tournament group teams.', true) ?>">
+            <i class="fa fa-people-carry"></i>
+        </a>
+        <a class="edit-tournament-group btns" rel="tipsy"
+           title="<?php ___('Click here to edit this tournament group item.', true) ?>"
+           data-id="<?php echo $tournamentGroup->id; ?>">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a data-id="<?php echo $tournamentGroup->id; ?>"
+           rel="tipsy"
+           title="<?php ___('Click here to remove this tournament group item.', true) ?>"
+           class="remove-tournament-group btns">
+            <i class="fa fa-trash"></i>
+        </a>
+    </td>
+</tr>

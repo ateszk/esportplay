@@ -1,0 +1,107 @@
+<script>
+    jQuery(document).ready(function() {
+        DataTable('datatableTournament');
+        DateTimePicker('.datepicker', {format: 'Y-m-d H:i:s'});
+
+        WpMedia('.new-image', '#tournament-cover', '.staff-member-image-cover > img');
+        WpMedia('.new-logo-image', '#tournament-logo', '.staff-member-image-logo > img');
+        WpMedia('.new-thumbnail-image', '#tournament-thumbnail', '.staff-member-image-thumbnail > img');
+        WpMedia('.new-image-banner', '#tournament-banner', '.staff-member-image-banner > img');
+
+        ModalResolver()
+            .setTableSelector('#datatableTournament')
+            .setModalSelector('#modal-tournament')
+            .setInputPrefix('#tournament-')
+            .setCreateSelector('#add-tournament')
+            .setEditSelector('.edit-tournament')
+
+            .setImageResourceId('cover')
+            .setImageResourceId('logo')
+            .setImageResourceId('thumbnail')
+            .setImageResourceId('banner')
+
+            .setRemoveSelector('.remove-tournament')
+            .setSaveSelector('.save-tournament')
+            .setPrimaryKeySelector('tournamentId')
+            .setCreateEndpoint('<?php echo route('tournament_createTournament') ;?>')
+            .setEditEndpoint('<?php echo route('tournament_getTournament') ;?>')
+            .setUpdateEndpoint('<?php echo route('tournament_updateTournament') ;?>')
+            .setRemoveEndpoint('<?php echo route('tournament_removeTournament'); ?>')
+            .setTableRowSelector('#tr-')
+            .setAccessorMap([
+                'name',
+                'cover',
+                'location',
+                'start_date',
+                'game_id',
+                'about',
+                'twitter',
+                'instagram',
+                'facebook',
+                'discord',
+                'steam',
+                'team_number',
+                'group_number',
+                'prize_pool',
+                'status',
+                'rr_text',
+                'rr_value',
+                'logo',
+                'thumbnail',
+                'banner',
+            ])
+            .setValidationRules([
+                {
+                    field: '#tournament-game_id',
+                    rule: 'isEqual',
+                    value: 0,
+                    message: 'You must select game to proceed with tournament creating.'
+                },
+                {
+                    field: '#tournament-status',
+                    rule: 'isEqual',
+                    value: 0,
+                    message: 'You must select tournament status to proceed with tournament creating.'
+                }
+
+            ])
+            .init()
+        ;
+
+        $('#datatableTournament').on('click', '.manage-t-teams', function() {
+            let teamId = $(this).attr('data-id');
+            $('.save-tournament-team').attr('data-id', teamId);
+            let data = {
+                'action': '<?php echo route('tournament_getTournamentTeam', false) ;?>',
+                'tournamentId': teamId,
+                'page': '<?php echo route('tournament_getTournamentTeam', false) ;?>'
+            };
+
+            $.post('<?php echo route('tournament_getTournamentTeam') ;?>', data, function(response) {
+                console.log(response);
+                let playerIDS = getJsonResponse(response);
+                $('.js-example-basic-multiple').select2();
+                $('#tournament-team').val(playerIDS).trigger('change');
+                $('#modal-tournament-team').fadeIn();
+            });
+        });
+
+        $('.save-tournament-team').on('click', function(e) {
+            preventAll(e);
+            let tournamentId = $(this).attr('data-id'), values = $('#tournament-team').val();
+            let data = {
+                'action': '<?php echo route('tournament_updateTournamentTeam', false) ;?>',
+                'tournamentId': tournamentId,
+                'values': values,
+                'page': '<?php echo route('tournament_updateTournamentTeam', false) ;?>'
+            };
+
+            $.post('<?php echo route('tournament_updateTournamentTeam') ;?>', data, function() {
+                $('#modal-tournament-team').fadeOut();
+                setTimeout(function () {
+                    location.reload();
+                }, 1)
+            });
+        });
+    });
+</script>

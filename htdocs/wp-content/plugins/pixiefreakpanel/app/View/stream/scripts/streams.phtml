@@ -1,0 +1,25 @@
+<script>
+    jQuery(document).ready(function() {
+        DataTable('datatableStream');
+        WpMedia('.new-image', '#stream-thumbnail', '.staff-member-image > img');
+        ModalResolver()
+            .setTableSelector('#datatableStream')
+            .setModalSelector('#modal-stream')
+            .setInputPrefix('#stream-')
+            .setCreateSelector('#add-stream')
+            .setEditSelector('.edit-stream')
+            .setImageResourceId('thumbnail')
+            .setRemoveSelector('.remove-stream')
+            .setSaveSelector('.save-stream')
+            .setPrimaryKeySelector('streamId')
+            .setCreateEndpoint('<?php echo route('stream_createStream') ;?>')
+            .setEditEndpoint('<?php echo route('stream_getStream') ;?>')
+            .setUpdateEndpoint('<?php echo route('stream_updateStream') ;?>')
+            .setRemoveEndpoint('<?php echo route('stream_removeStream'); ?>')
+            .setTableRowSelector('#tr-')
+            .setAccessorMap(['title', 'subtitle', 'thumbnail', 'link', 'is_online', 'type'])
+            .init()
+        ;
+
+    });
+</script>

@@ -1,0 +1,37 @@
+<div id="modal-tournament-team" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p"><?php echo ___('Edit Tournament Teams'); ?></p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <select class="js-example-basic-multiple input-staff" id="tournament-team" name="teams[]" multiple="multiple">
+                        <?php $teams = \PixieFreakPanel\Model\Team::query()->get(); ?>
+                        <?php if ($teams->isNotEmpty()): ?>
+                            <?php foreach ($teams as $team): ?>
+                                <option value="<?php echo $team->id; ?>">
+                                    <?php echo $team->name; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-tournament-team"
+                   data-id="0"
+            >
+        </div>
+    </div>
+</div>

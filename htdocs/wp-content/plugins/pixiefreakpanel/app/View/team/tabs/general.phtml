@@ -1,0 +1,115 @@
+<section id="general" class="admin-section">
+    <form method="POST" class="footer-options-form" action="<?php route('team_update'); ?>">
+        <input type="hidden" name="task" value="general_settings">
+        <h2><?php esc_html_e('General Settings', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <a target="_blank" href="<?php echo screenshots_path('team-general.jpg'); ?>">
+                <?php esc_html_e('Click here', 'pixiefreakpanel'); ?>
+            </a>
+            <?php esc_html_e('to see which element you are changing', 'pixiefreakpanel'); ?>
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th colspan="2">
+                    <h3>
+                        <?php esc_html_e('Single Team Page Settings', 'pixiefreakpanel'); ?>
+                    </h3>
+                    <p class="description" style="max-width: 100%;">
+                        <?php esc_html_e('General settings for single team page item.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('Single Team Roster Title/Subtitle', 'pixiefreakpanel'); ?>
+                    <p class="description" style="max-width: 100%;">
+                        <?php esc_html_e('Here you can edit/customize Single Team Roster Title/Subtitle text.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php settings_input('team', 'roster_title', 'text', '', ___('Title')); ?>
+                    <?php settings_input('team', 'roster_subtitle', 'text', '', ___('Subtitle')); ?>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('CTA Roster Button', 'pixiefreakpanel'); ?>
+                    <p class="description">
+                        <?php esc_html_e('Here you can customize Roster CTA button.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php settings_input('team', 'cta.text', 'text', '', ___('CTA Text')); ?>
+                    <?php settings_input('team', 'cta.link', 'text', '', ___('CTA Link')); ?>
+                    <?php settings_checkbox('team', 'cta.show', ['SHOW', 'HIDE']); ?>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th colspan="2">
+                    <h3>
+                        <?php esc_html_e('Team List Page Settings', 'pixiefreakpanel'); ?>
+                    </h3>
+                    <p class="description" style="max-width: 100%;">
+                        <?php esc_html_e('General settings for team list page item.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('Team List Title/Subtitle', 'pixiefreakpanel'); ?>
+                    <p class="description" style="max-width: 100%;">
+                        <?php esc_html_e('Here you can edit/customize Team List Title/Subtitle text.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php settings_input('teams', 'title', 'text', '', ___('Title')); ?>
+                    <?php settings_input('teams', 'subtitle', 'text', '', ___('Subtitle')); ?>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('List Team Background', 'pixiefreakpanel'); ?>
+                    <p class="description">
+                        <?php esc_html_e('Here you change/add list team header background.', 'pixiefreakpanel'); ?>
+                        <div class="image-preview-holder image-preview-ss aboutBG">
+                            <img class="image-preview img-preview-bnr" src="<?php echo pixiefreak_settings('teams')->get('teams_banner_image'); ?>">
+                        </div>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <input type="hidden" name="teams_teams_banner_image" value="" id="teams-teams_banner_image">
+                    <input type="button" class="button button-secondary" value="<?php echo ___('SELECT BANNER IMAGE'); ?>" id="lsingle">
+                </td>
+            </tr>
+
+            <tr>
+                <th scope="row">
+                    <?php esc_html_e('CTA Player Page', 'pixiefreakpanel'); ?>
+                    <p class="description">
+                        <?php esc_html_e('Here you can customize player page CTA button.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+                <td class="tdCheckbox">
+                    <?php settings_input('player', 'cta_player.text', 'text', '', ___('CTA Text')); ?>
+                    <?php settings_input('player', 'cta_player.link', 'text', '', ___('CTA Link')); ?>
+                    <?php settings_input('player', 'cta_player.icon', 'text', '', ___('CTA Icon')); ?>
+                    <?php settings_checkbox('player', 'cta_player.show', ['SHOW', 'HIDE']); ?>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <?php submit('team_update'); ?>
+
+    </form>
+</section>

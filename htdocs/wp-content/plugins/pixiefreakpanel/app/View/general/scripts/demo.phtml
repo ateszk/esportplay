@@ -1,0 +1,15 @@
+<script>
+    jQuery(document).ready(function() {
+        $('#submit-pixiefreakpanel_demo_export').on('click', function(e) {
+            preventAll(e);
+            $('#page-id').val('pixiefreakpanel_demo_export');
+            window.open(redirect('pixiefreakpanel_demo_export', true), '_blank');
+        });
+
+        $('#submit-pixiefreakpanel_demo_import').on('click', function(e) {
+            preventAll(e);
+            $('#page-id').val('pixiefreakpanel_demo_import');
+            $('#form-type').submit();
+        });
+    });
+</script>

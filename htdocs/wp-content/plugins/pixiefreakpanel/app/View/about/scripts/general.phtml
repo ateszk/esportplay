@@ -1,0 +1,76 @@
+<script>
+    jQuery(document).ready(function() {
+        var modalStats = $('#modal-stats'),
+            btn        = $('#modal-stats-btn'),
+            close      = $('.close')
+        ;
+
+        btn.on('click', function(event) {
+            preventAll(event);
+            modalStats.slideDown();
+        });
+
+        close.on('click', function() {
+            modalStats.slideUp();
+        });
+
+        $('#wpbody-content').on('click', function(event) {
+            if (event.target === modalStats) {
+                modalStats.slideUp();
+            }
+        });
+
+        $(".stats-icon").on('click tap', function(event) {
+            preventAll(event);
+
+            var statsIcon = wp.media.frames.file_frame = wp.media({
+                title: '<?php echo ___('Choose a image'); ?>',
+                button: { text: '<?php echo ___('Choose a image'); ?>'},
+                multiple: false
+            });
+
+            var itemId = $(this).data('id');
+            var input = $('#icon-'+itemId), $this = $(this);
+            statsIcon.on('select', function() {
+                var attr = statsIcon.state().get('selection').first().toJSON();
+                input.val(attr.url);
+                $('.stats-modal-preview' +itemId).find('img').attr('src', attr.url);
+                $this.attr('style', 'background-image: url("' +attr.url + '") !important;');
+            });
+
+            statsIcon.open();
+        });
+
+        $('.save-stats').on('click', function(e) {
+            preventAll(e);
+
+            var values = [];
+
+            $('.stats-input').each(function() {
+                values.push($(this).val());
+            });
+
+            var data = {
+                'action': '<?php echo route('about_statisticUpdate', false) ;?>',
+                'values': values,
+                'page': '<?php echo route('about_statisticUpdate', false) ;?>'
+            };
+
+            $.post('<?php echo route('about_statisticUpdate') ;?>', data, function(response) {
+                $('#modal-stats').slideUp();
+            });
+        });
+
+        WpMedia('#select-cover-image', '#cover-image', '.aboutCover > img')
+        WpMedia('#select-banner-image', '#banner-image', '.aboutBanner > img')
+
+
+
+        let pickSelectors = ['first', 'second', 'third', 'fourth'];
+        for (let selector of pickSelectors) {
+            $('input[name="about_about_'+selector+'[icon]"]').iconpicker({ placement: 'top' });
+        }
+
+        $('.iconpicker-item').on('click', (e) => { e.preventDefault(e); });
+    });
+</script>

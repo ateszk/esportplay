@@ -1,0 +1,35 @@
+<script>
+    jQuery(document).ready(function() {
+        DataTable('datatableTournamentGroupTeams');
+
+        let teamTabSelector  = $('#wpbody-content > div.main-content > section > ul > li:nth-child(4) > a');
+        teamTabSelector.hide();
+        if (hasParam('tournament-id')) {
+            teamTabSelector.trigger('click');
+        }
+
+        ModalResolver()
+            .setTableSelector('#datatableTournamentGroupTeams')
+            .setModalSelector('#modal-tournament-group-team')
+            .setInputPrefix('#tournament-group-team-')
+            .setCreateSelector('#add-group-team')
+            .setEditSelector('.edit-tournament-group-team')
+            .setRemoveSelector('.remove-tournament-group-team')
+            .setSaveSelector('.save-tournament-group-team')
+            .setPrimaryKeySelector('tournamentGroupTeamId')
+            .setCreateEndpoint('<?php echo route('tournament_createTournamentGroupTeam') ;?>')
+            .setEditEndpoint('<?php echo route('tournament_getTournamentGroupTeam') ;?>')
+            .setUpdateEndpoint('<?php echo route('tournament_updateTournamentGroupTeam') ;?>')
+            .setRemoveEndpoint('<?php echo route('tournament_removeTournamentGroupTeam'); ?>')
+            .setTableRowSelector('#tr-group-team-')
+            .setAccessorMap([
+                'tournament_group_team_id',
+                'win',
+                'loss',
+                'draw',
+                'point'
+            ])
+            .init()
+        ;
+    });
+</script>

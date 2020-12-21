@@ -1,0 +1,70 @@
+<script>
+    jQuery(document).ready(function() {
+        DataTable('matchTable');
+        DateTimePicker('.datepicker', {format: 'Y-m-d H:i:s'});
+        ModalResolver()
+            .setTableSelector('#matchTable')
+            .setModalSelector('#modal-match')
+            .setInputPrefix('#match-')
+            .setCreateSelector('#add-match')
+            .setEditSelector('.edit-match')
+            .setRemoveSelector('.remove-match')
+            .setSaveSelector('.save-match')
+            .setPrimaryKeySelector('matchId')
+            .setCreateEndpoint('<?php echo route('match_createMatch') ;?>')
+            .setEditEndpoint('<?php echo route('match_getMatch') ;?>')
+            .setUpdateEndpoint('<?php echo route('match_updateMatch') ;?>')
+            .setRemoveEndpoint('<?php echo route('match_removeMatch'); ?>')
+            .setTableRowSelector('#tr-')
+            .setAccessorMap([
+                'game_id',
+                'name',
+                'tournament_id',
+                'start_date',
+                'status',
+                'team_a_id',
+                'team_b_id',
+                'team_a_result',
+                'team_b_result',
+                'type',
+                'stream_id',
+                'cta_match_text',
+                'cta_match_link'
+            ])
+            .setValidationRules([
+                {
+                    field: '#match-game_id',
+                    rule: 'isEqual',
+                    value: 0,
+                    message: 'You must select "Match Game" to proceed with match creating.'
+                },
+                {
+                    field: '#match-status',
+                    rule: 'isEqual',
+                    value: 0,
+                    message: 'You must select "Match Status" to proceed with match creating.'
+                },
+                {
+                    field: '#match-type',
+                    rule: 'isEqual',
+                    value: 0,
+                    message: 'You must select "Match Type" to proceed with match creating.'
+                },
+                {
+                    field: '#match-team_a_id',
+                    rule: 'isEqual',
+                    value: 0,
+                    message: 'You must select "Match Team A" to proceed with match creating.'
+                },
+                {
+                    field: '#match-team_b_id',
+                    rule: 'isEqual',
+                    value: 0,
+                    message: 'You must select "Match Team B" to proceed with match creating.'
+                }
+
+            ])
+            .init()
+        ;
+    });
+</script>

@@ -1,0 +1,29 @@
+<script>
+    jQuery(document).ready(function() {
+        DataTable('datatableAchievements');
+        WpMedia('.achievement-wpmedia', '#achievement-thumbnail', '.achievements > img');
+        ModalResolver()
+            .setTableSelector('#datatableAchievements')
+            .setModalSelector('#modal-achievement')
+            .setInputPrefix('#achievement-')
+            .setCreateSelector('#add-achievement')
+            .setEditSelector('.edit-achievement')
+            .setImageResourceId('thumbnail')
+            .setRemoveSelector('.remove-achievement')
+            .setSaveSelector('.save-achievement')
+            .setPrimaryKeySelector('achievementId')
+            .setCreateEndpoint('<?php echo route('achievement_createAchievement') ;?>')
+            .setEditEndpoint('<?php echo route('achievement_getAchievement') ;?>')
+            .setUpdateEndpoint('<?php echo route('achievement_updateAchievement') ;?>')
+            .setRemoveEndpoint('<?php echo route('achievement_removeAchievement'); ?>')
+            .setTableRowSelector('#tr-achievement-')
+            .setAccessorMap([
+                'name',
+                'thumbnail',
+            ])
+            .init()
+        ;
+
+        Sortable('<?php echo class_slasher(\PixieFreakPanel\Model\Achievement::class);?>', 'tr-achievement-', '.sortableAchievement');
+    });
+</script>

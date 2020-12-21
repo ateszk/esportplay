@@ -1,0 +1,35 @@
+body{
+    background: #fff !important;
+}
+
+.login h1 a{
+    background: url(wp_grey.png) center center no-repeat;
+}
+
+.login form{
+    border: none;
+    box-shadow: none !important;
+}
+
+/* Everything bellow, just changes the color for the login button... uh.. */
+input[type=checkbox]:checked:before { color: #8bbc9f; }
+
+input[type=radio]:checked:before { background: #8bbc9f; }
+
+.wp-core-ui input[type="reset"]:hover, .wp-core-ui input[type="reset"]:active { color: #0096dd; }
+
+/* Core UI */
+.wp-core-ui .button-primary { background: #8bbc9f; border-color: #6ba984 #5c9f77 #5c9f77; color: white; box-shadow: 0 1px 0 #5c9f77; text-shadow: 0 -1px 1px #5c9f77, 1px 0 1px #5c9f77, 0 1px 1px #5c9f77, -1px 0 1px #5c9f77; }
+.wp-core-ui .button-primary:hover, .wp-core-ui .button-primary:focus { background: #95c2a7; border-color: #5c9f77; color: white; box-shadow: 0 1px 0 #5c9f77; }
+.wp-core-ui .button-primary:focus { box-shadow: inset 0 1px 0 #6ba984, 0 0 2px 1px #33b3db; }
+.wp-core-ui .button-primary:active { background: #6ba984; border-color: #5c9f77; box-shadow: inset 0 2px 0 #5c9f77; }
+.wp-core-ui .button-primary[disabled], .wp-core-ui .button-primary:disabled, .wp-core-ui .button-primary.button-primary-disabled, .wp-core-ui .button-primary.disabled { color: #c7d1cb !important; background: #71ad8a !important; border-color: #5c9f77 !important; text-shadow: none !important; }
+.wp-core-ui .button-primary.button-hero { box-shadow: 0 2px 0 #5c9f77 !important; }
+.wp-core-ui .button-primary.button-hero:active { box-shadow: inset 0 3px 0 #5c9f77 !important; }
+.wp-core-ui .wp-ui-primary { color: #fff; background-color: #36395c; }
+.wp-core-ui .wp-ui-text-primary { color: #36395c; }
+.wp-core-ui .wp-ui-highlight { color: #fff; background-color: #8bbc9f; }
+.wp-core-ui .wp-ui-text-highlight { color: #8bbc9f; }
+.wp-core-ui .wp-ui-notification { color: #fff; background-color: #d2ac1f; }
+.wp-core-ui .wp-ui-text-notification { color: #d2ac1f; }
+.wp-core-ui .wp-ui-text-icon { color: #f1f1f3; }

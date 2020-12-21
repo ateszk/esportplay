@@ -1,0 +1,115 @@
+<div id="modal-player" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p"><?php echo ___('Edit Player'); ?></p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Avatar', true); ?></h4>
+                </div>
+                <div class="staff-member-image player1 each-avatar">
+                    <img src="">
+                    <input type="hidden" value="" id="player-avatar">
+                    <input type="button" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary new-image pick1"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Avatar Transparent', true); ?></h4>
+                </div>
+                <div class="staff-member-image player3 each-avatar_transparent">
+                    <img src="">
+                    <input type="hidden" value="" id="player-avatar_transparent">
+                    <input type="button" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary new-image pick3"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Banner', true); ?></h4>
+                </div>
+                <div class="staff-member-image player2 each-banner">
+                    <img src="">
+                    <input type="hidden" value="" id="player-banner">
+                    <input type="button" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary new-image pick2"
+                    >
+                </div>
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Cover', true); ?></h4>
+                </div>
+                <div class="staff-member-image player4 each-cover">
+                    <img src="">
+                    <input type="hidden" value="" id="player-cover">
+                    <input type="button" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary new-image pick4"
+                    >
+                </div>
+
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <input type="text" class="input-staff" placeholder="<?php ___('First Name', true); ?>" id="player-first_name">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Last Name', true); ?>" id="player-last_name">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Nickname', true); ?>" id="player-nickname">
+
+                    <select class="staff-select input-staff" id="player-country">
+                        <option value="0" selected=""><?php ___('Select a Country', true); ?></option>
+                        <?php if (!empty($countries = \PixieFreakPanel\Model\Countries::all())): ?>
+
+                            <?php foreach ($countries as $country): ?>
+                                <option value="<?php echo $country['code']; ?>">
+                                    <?php echo $country['name']; ?>
+                                </option>
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
+                    </select>
+                    <input type="text" class="input-staff" placeholder="<?php ___('Role', true); ?>" id="player-role">
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Birthday', true); ?></h4>
+                    </div>
+                    <input type="text" class="pixie-input input-staff"
+                           name="startdate"
+                           value=""
+                           id="player-birth_date"
+                           placeholder="<?php ___('Age', true); ?>"
+                    >
+
+                    <textarea class="input-staff" id="player-biography"
+                              title="<?php ___('Biography'); ?>"
+                              placeholder="<?php ___('Biography', true); ?>"></textarea>
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Socials', true); ?></h4>
+                    </div>
+                    <input type="text" class="input-staff" placeholder="<?php ___('Facebook', true); ?>" id="player-facebook">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Instagram', true); ?>" id="player-instagram">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Discord', true); ?>" id="player-discord">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Steam', true); ?>" id="player-steam">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Twitch', true); ?>" id="player-twitch">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Twitter', true); ?>" id="player-twitter">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-player"
+                   data-id="0"
+            >
+        </div>
+    </div>
+</div>

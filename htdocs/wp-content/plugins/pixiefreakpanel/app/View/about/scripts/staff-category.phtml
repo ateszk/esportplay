@@ -1,0 +1,101 @@
+<script>
+    jQuery(document).ready(function() {
+        DataTable('datatableCategory');
+
+        $('#add-category').on('click', function() {
+            $('#modal-category').fadeIn();
+            $('.modal-header-p').text('<?php ___('Create new Category', true); ?>');
+        });
+
+        $('.modal-save').on('click', function(event) {
+            preventAll(event);
+
+            if ($(this).attr('data-id') != 0) {
+                return updateStaffCategory($(this));
+            }
+
+            var categoryName = $('#category-name').val().trim();
+            if (!categoryName.length || categoryName.length < 0) {
+                alert('<?php ___('Category name can\'t be blank', true); ?>');
+                return;
+            }
+
+            $.post('<?php echo route('about_addStaffMemberCategory') ;?>', {
+                'action': '<?php echo route('about_addStaffMemberCategory', false) ;?>',
+                'name': categoryName,
+                'page': '<?php echo route('about_addStaffMemberCategory', false) ;?>'
+            }, function(response) {
+                var response = getJsonResponse(response);
+                if (response.hasOwnProperty(0)) {
+                    var createdId = response[0];
+                    $('#datatableCategory tbody tr:last').after(`
+                            <tr data-id="${createdId}">
+                                <td class="tc">${createdId}</td>
+                                <td class="tc" id="category-name-${createdId}">${categoryName}</td>
+                                <td class="tc">
+                                    <a class="edit-staff-category btns" rel="tipsy"
+                                       title="<?php ___('Click here to edit this staff category.', true) ?>"
+                                       data-id="${createdId}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a  data-id="${createdId}" rel="tipsy"
+                                        title="<?php ___('Click here to remove this staff category.', true) ?>"
+                                        class="remove-member-category btns"
+                                    >
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                    `);
+
+                    $('#modal-category').fadeOut();
+                }
+
+                $('#category-name').val('');
+                $('.modal-save').data('id', 0);
+            });
+        });
+
+        $('#datatableCategory').on('click', '.remove-member-category', function(event) {
+            preventAll(event);
+            var categoryId = $(this).data('id');
+            $.post('<?php echo route('about_removeStaffMemberCategory') ;?>', {
+                'action': '<?php echo route('about_removeStaffMemberCategory', false) ;?>',
+                'categoryId': categoryId,
+                'page': '<?php echo route('about_removeStaffMemberCategory', false) ;?>'
+            }, function() {
+                $('#tr-category-'+categoryId).fadeOut();
+            });
+        });
+
+        $('#datatableCategory').on('click', '.edit-staff-category', function(event) {
+            preventAll(event);
+            console.log($(this).data('id'));
+            $('#category-name').val($('#category-name-'+$(this).data('id')).html().trim());
+            $('.modal-save').attr('data-id', $(this).data('id'));
+            $('.modal-header-p').text('<?php ___('Edit Category', true); ?>');
+            $('#modal-category').fadeIn();
+        });
+
+        updateStaffCategory = function(context) {
+            var categoryId = context.attr('data-id');
+            var categoryName = $('#category-name').val().trim();
+            if (!categoryName.length || categoryName.length < 0) {
+                alert('<?php ___('Category name cannot be blank', true); ?>');
+                return;
+            }
+
+            $.post('<?php echo route('about_updateStaffMemberCategory') ;?>', {
+                'action': '<?php echo route('about_updateStaffMemberCategory', false) ;?>',
+                'categoryId': categoryId,
+                'name': categoryName,
+                'page': '<?php echo route('about_updateStaffMemberCategory', false) ;?>'
+            }, function() {
+                $('#category-name-'+context.attr('data-id')).html(categoryName);
+                $('#modal-category').fadeOut();
+                $('#category-name').val('');
+                $('.modal-save').attr('data-id', 0);
+            });
+        };
+    });
+</script>

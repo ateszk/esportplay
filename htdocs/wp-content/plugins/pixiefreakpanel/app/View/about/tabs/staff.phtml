@@ -1,0 +1,108 @@
+<section id="staff" class="admin-section">
+    <form method="POST" class="footer-options-form" action="<?php route('about_update'); ?>">
+        <h2><?php esc_html_e('About Staff', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <input type="button" class="button button-secondary btn-right" value="<?php ___('Add Member', true); ?>" id="add-member">
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table id="datatable" class="widefat fixed" cellspacing="0">
+            <thead>
+            <tr>
+                <th class="tc"><?php ___('ID', true) ?></th>
+                <th class="tc"><?php ___('Email', true) ?></th>
+                <th class="tc"><?php ___('Name', true) ?></th>
+                <th class="tc"><?php ___('Role', true) ?></th>
+                <th class="tc"><?php ___('Action', true) ?></th>
+            </tr>
+            </thead>
+            <tbody>
+                <?php if ($staff->isNotEmpty()): ?>
+
+                    <?php foreach ($staff as $member): ?>
+
+                        <tr id="tr-<?php echo $member->id; ?>">
+                            <td class="tc"><?php echo $member->id; ?></td>
+                            <td class="tc"><?php echo $member->label; ?></td>
+                            <td class="tc"><?php echo $member->name; ?></td>
+                            <td class="tc"><?php echo $member->role; ?></td>
+                            <td class="tc">
+                                <a class="edit-staff-member btns" rel="tipsy"
+                                   title="<?php ___('Click here to edit this staff member.', true) ?>"
+                                   data-id="<?php echo $member->id; ?>">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a data-id="<?php echo $member->id; ?>" rel="tipsy" title="<?php ___('Click here to remove this staff member.', true) ?>"
+                                   class="remove-member btns">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                    <?php endforeach; ?>
+
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </form>
+</section>
+
+<div id="modal-staff" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p"><?php echo ___('Edit staff member'); ?></p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+                <div class="staff-member-image">
+                    <img src="">
+                    <input type="hidden" value="" id="staff-avatar">
+                    <input type="submit" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary new-image"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <input type="text" class="input-staff" placeholder="<?php ___('First & Last name', true); ?>" id="staff-name">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Email', true); ?>" id="staff-label">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Role (CEO, CTO, Project Manager)', true); ?>" id="staff-role">
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Socials', true); ?></h4>
+                    </div>
+
+                    <input type="text" class="input-staff" placeholder="<?php ___('Facebook', true); ?>" id="staff-facebook">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Instagram', true); ?>" id="staff-instagram">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Twitter', true); ?>" id="staff-twitter">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Linkedin', true); ?>" id="staff-linkedin">
+                </div>
+
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Category/Sector', true); ?></h4>
+                </div>
+                <select class="staff-select input-staff" id="staff-staff_category_id">
+                    <?php foreach ($categories as $category): ?>
+                        <option value="<?php echo $category->id; ?>">
+                            <?php echo $category->name; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" name="submitBtn" value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-staff-member" data-id="0">
+        </div>
+    </div>
+</div>
+
+<?php scripts(__DIR__ , 'staff'); ?>

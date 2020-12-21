@@ -1,0 +1,61 @@
+<tr id="tr-<?php echo $team->id; ?>">
+
+    <td class="tc"> <?php echo $team->id; ?> </td>
+
+    <td class="tc"> <?php echo $team->name; ?> </td>
+
+    <td class="tc"> <?php echo $team->game ? $team->game->name : ___('No Game'); ?> </td>
+
+    <td class="tc">
+        <div class="bgForImg hoverable">
+            <img src="<?php echo $team->team_logo; ?>" class="hoverable-img hoverable-img-<?php echo $team->id; ?>" style="display: none">
+            <img src="<?php echo $team->team_logo; ?>" style="max-width: 15%;" data-id="<?php echo $team->id; ?>">
+        </div>
+    </td>
+
+    <td class="tc"> <?php echo $team->country; ?> </td>
+
+    <td class="tc">
+        <a class="manage-statistic btns" rel="tipsy"
+           title="<?php ___('Click here to manage team statistic.', true) ?>"
+           data-id="<?php echo $team->id; ?>">
+            <i class="fa fa-chart-pie"></i>
+        </a>
+        <a class="manage-team-achievements btns" rel="tipsy"
+           title="<?php ___('Click here to manage team achievements.', true) ?>"
+           data-id="<?php echo $team->id; ?>">
+            <i class="fa fa-trophy"></i>
+        </a>
+    </td>
+
+    <td class="tc">
+        <a class="manage-team-streams btns" rel="tipsy"
+           title="<?php ___('Click here to manage team stream records.', true) ?>"
+           data-id="<?php echo $team->id; ?>">
+            <i class="fab fa-twitch"></i>
+        </a>
+        <a data-id="<?php echo $team->id; ?>"
+           rel="tipsy"
+           title="<?php ___('Click here to manage team players.', true) ?>"
+           class="manage-team-players btns">
+            <i class="fa fa-users"></i>
+        </a>
+    </td>
+
+    <td class="tc">
+
+        <?php post_slug_builder('team', $team->slug); ?>
+
+        <a class="edit-team btns" rel="tipsy"
+           title="<?php ___('Click here to edit this team item.', true) ?>"
+           data-id="<?php echo $team->id; ?>">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a data-id="<?php echo $team->id; ?>"
+           rel="tipsy"
+           title="<?php ___('Click here to remove this team item.', true) ?>"
+           class="remove-team btns">
+            <i class="fa fa-trash"></i>
+        </a>
+    </td>
+</tr>

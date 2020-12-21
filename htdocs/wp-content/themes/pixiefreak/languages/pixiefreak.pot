@@ -1,0 +1,669 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PixieFreak\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-26 15:58+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: functions.php:24
+msgctxt "Google font: on or off"
+msgid "on"
+msgstr ""
+
+#: functions.php:191
+msgid "Header Menu"
+msgstr ""
+
+#: functions.php:192
+msgid "Useful Links"
+msgstr ""
+
+#: functions.php:193
+msgid "Footer Left Menu"
+msgstr ""
+
+#: functions.php:194
+msgid "Footer Right Menu"
+msgstr ""
+
+#: functions.php:219
+msgid "Menu Left"
+msgstr ""
+
+#: functions.php:230
+msgid "Menu Right"
+msgstr ""
+
+#: functions.php:473
+msgid "Side Area"
+msgstr ""
+
+#: functions.php:474
+msgid "The widgets on side area go here. Just drag the ones you want here."
+msgstr ""
+
+#: functions.php:498
+msgid "Check out this post"
+msgstr ""
+
+#: functions.php:595
+msgid "Name"
+msgstr ""
+
+#: functions.php:598
+msgid "Email"
+msgstr ""
+
+#: functions.php:601
+msgid "Website"
+msgstr ""
+
+#: functions.php:629
+msgid "Write a Reply or Comment"
+msgstr ""
+
+#: functions.php:722
+msgid "Comment"
+msgstr ""
+
+#: functions.php:633
+msgid "Post Comment"
+msgstr ""
+
+#: 404.php:10
+msgid "404 Page not found!"
+msgstr ""
+
+#: 404.php:13
+msgid "Random text goes here to show that page is not found"
+msgstr ""
+
+#. Name of the template
+#: page-stream.php:16
+msgid "Stream"
+msgstr ""
+
+#: page-stream.php:17 search.php:6 page-news.php:8
+msgid "This is where you can browse through our tournaments"
+msgstr ""
+
+#: page-stream.php:27
+msgid "Stream Page"
+msgstr ""
+
+#: page-sponsor.php:81 page-sponsor.php:123
+msgid "Website"
+msgstr ""
+
+#: archive.php:5 search.php:5
+msgid "Archive page"
+msgstr ""
+
+#: archive.php:6
+msgid "This is where you can find all of your posts in one place as an archive"
+msgstr ""
+
+#: archive.php:16
+msgid "Archive"
+msgstr ""
+
+#: archive.php:60 search.php:58 page-player.php:266 page-news.php:94 
+#: page-news.php:141 page-team.php:232 single.php:54 page-tournament.php:535 
+#: inc/sections/news-section.php:53
+msgid "Sticky"
+msgstr ""
+
+#: archive.php:80 search.php:78
+msgid ""
+"It seems we can't find what you're looking for. Perhaps searching can help."
+msgstr ""
+
+#. Name of the template
+msgid "Streams"
+msgstr ""
+
+#: page-streams.php:49 page-streams.php:75 page-match.php:129 
+#: page-player.php:195 page-team.php:161 inc/sections/stream-section.php:37 
+#: inc/sections/stream-section.php:63
+msgid "Online"
+msgstr ""
+
+#: page-streams.php:49 page-streams.php:75 page-match.php:127 
+#: page-player.php:195 page-team.php:161 inc/sections/stream-section.php:37 
+#: inc/sections/stream-section.php:63
+msgid "Offline"
+msgstr ""
+
+#: comments.php:7
+msgid "Comment(s)"
+msgstr ""
+
+#: comments.php:16
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:19
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: comments.php:22
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#. Name of the template
+msgid "Blank"
+msgstr ""
+
+#. Name of the template
+msgid "Sponsor"
+msgstr ""
+
+#: search.php:17
+msgid "No Search Results for: "
+msgstr ""
+
+#: search.php:19
+msgid "Search results for: "
+msgstr ""
+
+#. Name of the template
+msgid "Bracket"
+msgstr ""
+
+#: page-bracket.php:14
+msgid "More Info about the brackets!"
+msgstr ""
+
+#: page-bracket.php:17
+msgid "Random text brackets related goes here"
+msgstr ""
+
+#: page-bracket.php:22
+msgid "Back to tournaments"
+msgstr ""
+
+#. Name of the template
+#: page-gallery.php:23
+msgid "Gallery"
+msgstr ""
+
+#: page-gallery.php:41 page-news.php:36 page-about.php:93
+msgid "More"
+msgstr ""
+
+#. Name of the template
+msgid "Match"
+msgstr ""
+
+#: page-match.php:33 page-match.php:46
+msgid "View stream"
+msgstr ""
+
+#: page-match.php:40
+msgid "Exibition"
+msgstr ""
+
+#: page-match.php:89 page-match.php:245 page-match.php:340 
+#: page-matches.php:137 page-tournament.php:349 page-tournament.php:440 
+#: inc/sections/match-result-section.php:78
+msgid "VS"
+msgstr ""
+
+#: page-match.php:167
+msgid "Check out match history"
+msgstr ""
+
+#: page-match.php:168
+msgid "select one team and get going"
+msgstr ""
+
+#: page-match.php:205 page-match.php:300 page-matches.php:97 
+#: page-tournament.php:400 inc/sections/match-result-section.php:38
+msgid "View match"
+msgstr ""
+
+#. Name of the template
+msgid "Player"
+msgstr ""
+
+#: page-player.php:43
+msgid "Current Team"
+msgstr ""
+
+#: page-player.php:48
+msgid "Player Age"
+msgstr ""
+
+#: page-player.php:53
+msgid "Ingame Role"
+msgstr ""
+
+#: page-player.php:77
+msgid "Player Bio"
+msgstr ""
+
+#: page-player.php:139
+msgid "New"
+msgstr ""
+
+#: page-player.php:149
+msgid "Mouse"
+msgstr ""
+
+#: page-player.php:151
+msgid "Headphones"
+msgstr ""
+
+#: page-player.php:153
+msgid "Keyboard"
+msgstr ""
+
+#: page-player.php:160
+msgid "Buy now"
+msgstr ""
+
+#: page-player.php:183
+msgid "View player streams"
+msgstr ""
+
+#: page-player.php:228 page-team.php:194
+msgid "Team news"
+msgstr ""
+
+#: page-player.php:229 page-team.php:195 page-tournament.php:498
+msgid "Related news"
+msgstr ""
+
+#: footer.php:47
+msgid "Get in touch"
+msgstr ""
+
+#: footer.php:83
+msgid "Latest News"
+msgstr ""
+
+#: footer.php:99
+msgid "View all news here"
+msgstr ""
+
+#: footer.php:234
+msgid "Leave reply to: "
+msgstr ""
+
+#. Name of the template
+msgid "News"
+msgstr ""
+
+#: page-news.php:7
+msgid "News page"
+msgstr ""
+
+#: page-team.php:49
+msgid "Win"
+msgstr ""
+
+#: page-team.php:51
+msgid "Loses"
+msgstr ""
+
+#: page-team.php:53
+msgid "Tie"
+msgstr ""
+
+#: page-news.php:18
+msgid "News Feed"
+msgstr ""
+
+#: inc/sections/tournament-section.php:20
+msgid "Started"
+msgstr ""
+
+#: inc/sections/match-result-section.php:18 inc/sections/tournament-section.php:16
+msgid "Upcoming"
+msgstr ""
+
+#: inc/sections/match-result-section.php:20 inc/sections/tournament-section.php:18
+msgid "Finished"
+msgstr ""
+
+
+#: page-news.php:22 page-matches.php:43 page-teams.php:28 
+#: inc/sections/stream-section.php:16
+msgid "All"
+msgstr ""
+
+#. Name of the template
+msgid "Team"
+msgstr ""
+
+#: page-team.php:33
+msgid "Founded"
+msgstr ""
+
+#: page-team.php:55
+msgid "About the team"
+msgstr ""
+
+#: page-team.php:126
+msgid "Profile"
+msgstr ""
+
+#: page-team.php:148
+msgid "View all streams"
+msgstr ""
+
+#: page-team.php:149 page-matches.php:37 page-teams.php:22 
+#: page-tournament.php:131
+msgid "and get hyped in a minute"
+msgstr ""
+
+#: single.php:19 page.php:29
+msgid "Comments"
+msgstr ""
+
+#: single.php:57 page.php:62
+msgid "Posted by"
+msgstr ""
+
+#: single.php:58 page.php:63
+msgid "in"
+msgstr ""
+
+#: single.php:73
+msgid "Tags:"
+msgstr ""
+
+#. Name of the template
+msgid "Matches"
+msgstr ""
+
+#: page-matches.php:36 page-teams.php:21
+msgid "Select filter option on the right"
+msgstr ""
+
+#: page.php:79
+msgid "Pages:"
+msgstr ""
+
+#: page.php:85
+msgid "Next page"
+msgstr ""
+
+#: page.php:86
+msgid "Previous page"
+msgstr ""
+
+#. Name of the template
+msgid "Shop"
+msgstr ""
+
+#: page-shop.php:17
+msgid "Welcome to the Shop"
+msgstr ""
+
+#: page-shop.php:18
+msgid "Here you can find our product to purchase"
+msgstr ""
+
+#: page-shop.php:26 inc/sections/shop-section.php:28
+msgid "Shop fusion"
+msgstr ""
+
+#: page-shop.php:49 inc/sections/shop-section.php:66 
+#: inc/sections/shop-section.php:97
+msgid "Buy Now"
+msgstr ""
+
+#. Name of the template
+#: inc/sections/tournament-section.php:8
+msgid "Tournaments"
+msgstr ""
+
+#: page-tournaments.php:76 page-tournament.php:103 
+#: inc/sections/tournament-section.php:54
+msgid "Groups"
+msgstr ""
+
+#. Name of the template
+#: page-tournaments.php:77 page-tournament.php:99 
+#: inc/sections/tournament-section.php:55
+msgid "Teams"
+msgstr ""
+
+#: page-tournaments.php:86 page-tournament.php:107 
+#: inc/sections/tournament-section.php:64
+msgid "Prize pool"
+msgstr ""
+
+#: page-tournaments.php:87 page-tournament.php:108 
+#: inc/sections/tournament-section.php:65
+msgid "USD"
+msgstr ""
+
+#: page-tournaments.php:93 inc/sections/tournament-section.php:71
+msgid "More details"
+msgstr ""
+
+#: page-teams.php:92 page-tournament.php:166 inc/sections/team-section.php:57
+msgid "From"
+msgstr ""
+
+#: page-teams.php:99 page-tournament.php:173 inc/sections/team-section.php:64
+msgid "Team page"
+msgstr ""
+
+#: searchform.php:3
+msgid "Search"
+msgstr ""
+
+#. Name of the template
+msgid "About"
+msgstr ""
+
+#: page-about.php:79
+msgid "Meet the organization staff"
+msgstr ""
+
+#. Name of the template
+msgid "Tournament"
+msgstr ""
+
+#: page-tournament.php:73
+msgid "About the tournament"
+msgstr ""
+
+#: page-tournament.php:100
+msgid "Round robin"
+msgstr ""
+
+#: page-tournament.php:104
+msgid "Players"
+msgstr ""
+
+#: page-tournament.php:130
+msgid "Meet the competitors"
+msgstr ""
+
+#: page-tournament.php:189
+msgid "View our Standings"
+msgstr ""
+
+#: page-tournament.php:190
+msgid "Stay updated with all the statistic about the tournament"
+msgstr ""
+
+#: page-tournament.php:205
+msgid "Competitor"
+msgstr ""
+
+#: page-tournament.php:208
+msgid "m"
+msgstr ""
+
+#: page-tournament.php:209
+msgid "w"
+msgstr ""
+
+#: page-tournament.php:210
+msgid "d"
+msgstr ""
+
+#: page-tournament.php:211
+msgid "l"
+msgstr ""
+
+#: page-tournament.php:212
+msgid "p"
+msgstr ""
+
+#: page-tournament.php:249
+msgid "Want to see how the playout?"
+msgstr ""
+
+#: page-tournament.php:250
+msgid "Teams Clashing it up!"
+msgstr ""
+
+#: page-tournament.php:254
+msgid "View Brackets"
+msgstr ""
+
+#: page-tournament.php:272
+msgid "Check out our"
+msgstr ""
+
+#: page-tournament.php:273
+msgid "Match Schedule"
+msgstr ""
+
+#: page-tournament.php:280
+msgid "Previous Day"
+msgstr ""
+
+#: page-tournament.php:286
+msgid "Next Day"
+msgstr ""
+
+#: page-tournament.php:310
+msgid "Day"
+msgstr ""
+
+#: page-tournament.php:362
+msgid "Starts at"
+msgstr ""
+
+#: page-tournament.php:381
+msgid "Matches related to tournament"
+msgstr ""
+
+#: page-tournament.php:382
+msgid "Random tag line goes here"
+msgstr ""
+
+#: page-tournament.php:497
+msgid "Tournament news"
+msgstr ""
+
+#: inc/customization.php:17
+msgid "General"
+msgstr ""
+
+#: inc/customization.php:30
+msgid "Primary Color"
+msgstr ""
+
+#: inc/comment.php:21 inc/comment-child.php:21
+msgid "Posted"
+msgstr ""
+
+#: inc/comment.php:37 inc/comment-child.php:37
+msgid "Reply"
+msgstr ""
+
+#: inc/comment.php:44 inc/comment-child.php:44
+msgid "Delete"
+msgstr ""
+
+#: inc/comment.php:50 inc/comment-child.php:50
+msgid "Spam"
+msgstr ""
+
+#: inc/sections/match-result-section.php:6
+msgid "Latest Matches & Results"
+msgstr ""
+
+#: inc/sections/match-result-section.php:7
+msgid "This is live update of matches our teams playing right now"
+msgstr ""
+
+#: inc/sections/match-result-section.php:125
+msgid "If you want to see more matches"
+msgstr ""
+
+#: inc/sections/match-result-section.php:126 inc/sections/stream-section.php:86
+msgid "Visit special section to see them all"
+msgstr ""
+
+#: inc/sections/match-result-section.php:129
+msgid "All Matches"
+msgstr ""
+
+#: inc/sections/stream-section.php:10
+msgid "Featured Streams"
+msgstr ""
+
+#: inc/sections/stream-section.php:20
+msgid "Youtube"
+msgstr ""
+
+#: inc/sections/stream-section.php:24
+msgid "Twitch"
+msgstr ""
+
+#: inc/sections/stream-section.php:85
+msgid "If you want to see more streams"
+msgstr ""
+
+#: inc/sections/stream-section.php:90
+msgid "All Streams"
+msgstr ""
+
+#: inc/sections/team-section.php:11
+msgid "The Teams"
+msgstr ""
+
+#: inc/sections/team-section.php:12
+msgid "Meet our main power!"
+msgstr ""
+
+#. Name of the theme
+msgid "PixieFreak"
+msgstr ""
+
+#. Description of the theme
+msgid ""
+"PixieFreak - is a theme meant for eSports organizations / teams / gaming "
+"clans. The theme is built by the latest design standards in this industry, "
+"which brings the elite/premium feeling for the end user."
+msgstr ""
+
+#. URI of the theme
+msgid "http://themes.pixiesquad.com"
+msgstr ""
+
+#. Author of the theme
+msgid "PixieSquad.com | Shape The Gaming"
+msgstr ""
+
+#. Author URI of the theme
+msgid "http://pixiesquad.com"
+msgstr ""

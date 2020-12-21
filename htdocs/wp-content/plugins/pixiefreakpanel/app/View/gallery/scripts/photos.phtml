@@ -1,0 +1,26 @@
+<script>
+    jQuery(document).ready(function() {
+        DataTable('datatableGallery');
+        WpMedia('.new-image', '#gallery-image', '.staff-member-image > img');
+        ModalResolver()
+            .setTableSelector('#datatableGallery')
+            .setModalSelector('#modal-photo')
+            .setInputPrefix('#gallery-')
+            .setCreateSelector('#add-photo')
+            .setEditSelector('.edit-photo')
+            .setImageResourceId('image')
+            .setRemoveSelector('.remove-photo')
+            .setSaveSelector('.save-photo')
+            .setPrimaryKeySelector('galleryId')
+            .setCreateEndpoint('<?php echo route('gallery_createPhoto') ;?>')
+            .setEditEndpoint('<?php echo route('gallery_getPhoto') ;?>')
+            .setUpdateEndpoint('<?php echo route('gallery_updatePhoto') ;?>')
+            .setRemoveEndpoint('<?php echo route('gallery_removePhoto'); ?>')
+            .setTableRowSelector('#tr-')
+            .setAccessorMap(['image', 'gallery_category_id'])
+            .init()
+        ;
+
+        Sortable('<?php echo class_slasher(\PixieFreakPanel\Model\Gallery::class);?>', 'tr-', '.sortable');
+    });
+</script>

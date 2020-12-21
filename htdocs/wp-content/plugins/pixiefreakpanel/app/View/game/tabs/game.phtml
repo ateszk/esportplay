@@ -1,0 +1,36 @@
+<section id="games" class="admin-section">
+    <form method="POST" class="footer-options-form">
+        <h2><?php esc_html_e('Games', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <input type="button" class="button button-secondary btn-right" value="<?php ___('Add Game', true); ?>" id="add-game">
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table id="game-table" class="widefat fixed" cellspacing="0">
+            <thead>
+            <tr>
+                <th class="tc"><?php ___('ID', true) ?></th>
+                <th class="tc"><?php ___('Name', true) ?></th>
+                <th class="tc"><?php ___('Action', true) ?></th>
+            </tr>
+            </thead>
+            <tbody class="sortable">
+            <?php if ($games->isNotEmpty()): ?>
+
+                <?php foreach ($games as $game): ?>
+
+                    <?php include (__DIR__ . '/partials/game-table-tr.phtml'); ?>
+
+                <?php endforeach; ?>
+
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </form>
+</section>
+
+<?php include(__DIR__ . '/partials/game-modal.phtml'); ?>
+
+<?php scripts(__DIR__, 'game'); ?>

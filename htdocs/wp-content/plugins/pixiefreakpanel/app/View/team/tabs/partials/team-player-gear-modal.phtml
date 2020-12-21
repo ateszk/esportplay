@@ -1,0 +1,39 @@
+<div id="modal-player-gear" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p"><?php echo ___('Edit Player Gear'); ?></p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <select class="js-example-basic-multiple input-staff" id="player-gear" name="gears[]" multiple="multiple">
+                        <?php $gears = \PixieFreakPanel\Model\Gear::query()->get(); ?>
+                        <?php if ($gears->isNotEmpty()): ?>
+
+                            <?php foreach ($gears as $gear): ?>
+
+                                <option value="<?php echo $gear->id; ?>"><?php echo $gear->name; ?></option>
+
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-player-gear"
+                   data-id="0"
+            >
+        </div>
+    </div>
+</div>

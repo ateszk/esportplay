@@ -1,0 +1,524 @@
+<script>
+    jQuery(document).ready(function() {
+        var $ = jQuery,
+            activeTab = '#wpbody-content > div.main-content > section > ul > li.admin-pick.active',
+            url = window.location.href
+        ;
+
+        var currentTabName = $(activeTab).text().replace(/\s/g, '').toLowerCase();
+        if (url.indexOf('#') && (url.split('#')[1] !== currentTabName)) {
+            $('.admin-pick-list li:first').click();
+        }
+
+        $('.active-tab').val($(activeTab).text().replace(/\s/g, '').toLowerCase());
+        $('.admin-pick').on('click', function () {
+            $('.active-tab').val($(this).text().replace(/\s/g, '').toLowerCase())
+        });
+
+        $('.close').on('click', function(){ $('.modal').fadeOut()});
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) {
+                $('.modal').fadeOut();
+            }
+        });
+
+        let clipboard = new ClipboardJS('.get-post-tag');
+        clipboard.on('success', function(e) {
+            $('#modal-copied').fadeIn();
+            setTimeout(() => {
+                $('#modal-copied').fadeOut()
+            }, 1)
+        });
+
+        var DataTable = jQuery('#datatable').DataTable({});
+
+        setTimeout(function() {
+            window.scrollTo(0, 0);
+        }, 1);
+
+        $('.check').on('click', function () {
+            var selector = $(this).data('id');
+            var targetCheckbox = $('input:checkbox[name="' + selector + '"]');
+
+            targetCheckbox.val(targetCheckbox.is(':checked') ? 1 : 0);
+        });
+    });
+
+    let ModalResolver = function() {
+        let $parent = {
+            tableSelector: '',
+            inputPrefix: '',
+            createSelector: '',
+            editSelector: '',
+            imageResourceId: [],
+            removeSelector: '',
+            saveSelector: '',
+            modalSelector: '',
+            primaryKeySelector: '',
+            createEndpoint: '',
+            editEndpoint: '',
+            removeEndpoint: '',
+            updateEndpoint: '',
+            tableRowSelector: '',
+            accessorMap: [],
+            validationRules: [],
+            validationMessages: [],
+
+            setTableSelector: function (selector) {
+                this.tableSelector = selector;
+                return $parent;
+            },
+
+            setInputPrefix: function (prefix) {
+                this.inputPrefix = prefix;
+                return $parent;
+            },
+
+            setCreateSelector: function (selector)  {
+                this.createSelector = selector;
+                return $parent;
+            },
+
+            setEditSelector: function (selector)  {
+                this.editSelector = selector;
+                return $parent;
+            },
+
+            setRemoveSelector: function (selector)  {
+                this.removeSelector = selector;
+                return $parent;
+            },
+
+            setSaveSelector: function (selector)  {
+                this.saveSelector = selector;
+                return $parent;
+            },
+
+
+            setImageResourceId: function (id) {
+                this.imageResourceId.push(id);
+                return $parent;
+            },
+
+            setModalSelector: function (selector)  {
+                this.modalSelector = selector;
+                return $parent;
+            },
+
+            setPrimaryKeySelector: function (selector)  {
+                this.primaryKeySelector = selector;
+                return $parent;
+            },
+
+            setAccessorMap: function (accessorMap) {
+                this.accessorMap = accessorMap;
+                return $parent;
+            },
+
+            setCreateEndpoint: function (endpoint)  {
+                this.createEndpoint = endpoint;
+                return $parent;
+            },
+
+            setEditEndpoint: function (endpoint)  {
+                this.editEndpoint = endpoint;
+                return $parent;
+            },
+
+            setRemoveEndpoint: function (endpoint)  {
+                this.removeEndpoint = endpoint;
+                return $parent;
+            },
+
+            setUpdateEndpoint: function (endpoint)  {
+                this.updateEndpoint = endpoint;
+                return $parent;
+            },
+
+            setTableRowSelector: function (selector)  {
+                this.tableRowSelector = selector;
+                return $parent;
+            },
+
+            getInputPrefix: function () {
+                return $parent.inputPrefix;
+            },
+
+            setValidationRules: function (rules) {
+                this.validationRules = rules;
+                return $parent;
+            },
+
+            setValidationMessages: function (messages) {
+                this.validationMessages = messages;
+                return $parent;
+            },
+
+            getValidationMessages: function () {
+                return this.validationMessages;
+            },
+
+            isValid: function () {
+                let isValid = true, rules = this.validationRules.reverse();
+                for (let key in rules) {
+                    if (rules.hasOwnProperty(key)) {
+                        let validationRule = rules[key], jQValidationRule = $(validationRule.field);
+                        if (validationRule.rule === 'length') {
+                            if (!jQValidationRule || jQValidationRule.length <= 0 || !jQValidationRule.length) {
+                                isValid = false;
+                                this.setValidationMessages([validationRule.message]);
+                            }
+                        }
+
+                        if (validationRule.rule === 'checked') {
+                            if (!jQValidationRule || !jQValidationRule.is(':checked')) {
+                                isValid = false;
+                                this.setValidationMessages([validationRule.message]);
+                            }
+                        }
+
+                        if (validationRule.rule === 'notEqual') {
+                            if (!jQValidationRule || jQValidationRule.val() != validationRule.value) {
+                                isValid = false;
+                                this.setValidationMessages([validationRule.message]);
+                            }
+                        }
+
+                        if (validationRule.rule === 'isEqual') {
+                            if (!jQValidationRule || jQValidationRule.val() == validationRule.value) {
+                                isValid = false;
+                                this.setValidationMessages([validationRule.message]);
+                            }
+                        }
+                    }
+                }
+
+                return isValid;
+            },
+
+            init: function () {
+                let $context = this;
+                $(this.tableSelector).on('click', this.editSelector, function (e) {
+                    preventAll(e);
+                    purgeModalFields();
+
+                    let resourceId = $(this).data('id');
+                    $($context.saveSelector).attr('data-id', resourceId);
+                    let data = {
+                        action: $context.editEndpoint,
+                        page: $context.editEndpoint.replace('admin.php?page=', '')
+                    };
+
+                    data[$context.primaryKeySelector] = resourceId;
+                    $.post(data.action, data, function (data) {
+                        let response = getJsonResponse(data), accessorMap = $context.accessorMap;
+                        for (let key in accessorMap) {
+                            if (accessorMap.hasOwnProperty(key)) {
+                                let tmpAccess = accessorMap[key];
+                                if (response.hasOwnProperty(tmpAccess)) {
+                                    let inputObject = $($context.getInputPrefix() + tmpAccess);
+                                    if ($context.imageResourceId instanceof Array) {
+                                        let imageResourceIds = $context.imageResourceId;
+                                        for (let key in imageResourceIds) {
+                                            let tmpImgSelector = imageResourceIds[key];
+                                            if (tmpAccess === tmpImgSelector) {
+                                                if (imageResourceIds.length > 1) {
+                                                    $('.each-' + tmpImgSelector).find('img').attr('src', response[tmpAccess]);
+                                                } else {
+                                                    $('.staff-member-image').find('img').attr('src', response[tmpAccess]);
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        if (tmpAccess === $context.imageResourceId) {
+                                            $('.staff-member-image').find('img').attr('src', response[tmpAccess]);
+                                            continue;
+                                        }
+                                    }
+
+                                    if (inputObject.is('select')) {
+                                        inputObject.val(response[tmpAccess]);
+                                        continue;
+                                    }
+
+                                    inputObject.val(response[tmpAccess]);
+                                }
+                            }
+                        }
+
+                        $($context.modalSelector + ' .modal-header-p').text('<?php ___('Edit', true); ?>');
+                        $($context.modalSelector).fadeIn();
+                    });
+                });
+
+                $(this.saveSelector).on('click', function (e) {
+                    preventAll(e);
+
+                    if (!$context.isValid()) {
+                        let errorMessages = $context.getValidationMessages();
+                        for (let key in errorMessages) {
+                            if (errorMessages.hasOwnProperty(key)) {
+                                alert(errorMessages[key]);
+                            }
+                        }
+
+                        return;
+                    }
+
+                    let resourceId = $(this).attr('data-id');
+                    if (resourceId === 0 || resourceId === '0') {
+                        return create();
+                    }
+
+                    let modalInputFields = $context.accessorMap, values = {};
+                    for (let key in modalInputFields) {
+                        if (modalInputFields.hasOwnProperty(key)){
+                            values[modalInputFields[key]] = $($context.getInputPrefix() + modalInputFields[key]).val();
+                        }
+                    }
+
+                    let data = {
+                        'action': $context.updateEndpoint,
+                        'page': $context.updateEndpoint.replace('admin.php?page=', ''),
+                        'values': values
+                    };
+
+                    data[$context.primaryKeySelector] = resourceId;
+                    $.post($context.updateEndpoint, data, function() {
+                        purgeModalFields();
+                        $($context.modalSelector).fadeOut();
+                        setTimeout(function() {
+                            let prependix = window.location.href.substring(0, window.location.href.indexOf('#'));
+                            window.location.href = (prependix.length ? prependix : window.location.href) + '&notification=Successfully+saved' +'#'+ window.location.href.split('#')[1];
+                        }, 1);
+                    });
+
+                    data[this.primaryKeySelector] = resourceId;
+                });
+
+                $(this.tableSelector).on('click', $context.removeSelector, function (e) {
+                    preventAll(e);
+                    $('#modal-remove-item').fadeIn();
+                    $('.confirm-remove-btn')
+                        .attr('data-id', $(this).data('id'))
+                        .attr('data-endpoint', $context.removeEndpoint)
+                        .attr('data-primary-key', $context.primaryKeySelector)
+                        .attr('data-tableRowSelector', $context.tableRowSelector)
+                    ;
+                });
+
+                $('.confirm-remove-btn').on('click', function (e) {
+                    preventAll(e);
+                    let resourceId = $(this).attr('data-id'),
+                        endpoint = $(this).attr('data-endpoint'),
+                        primaryKeySelector = $(this).attr('data-primary-key'),
+                        tableRowSelector = $(this).attr('data-tableRowSelector')
+                    ;
+
+                    let data = {
+                        'action': endpoint,
+                        'page': endpoint.replace('admin.php?page=', '')
+                    };
+
+                    data[primaryKeySelector] = resourceId;
+                    $.post(endpoint, data, function() {
+                        $('#modal-remove-item').fadeOut();
+                        $(tableRowSelector + resourceId).fadeOut();
+                    });
+                });
+
+                $($context.createSelector).on('click', function (e) {
+                    preventAll(e);
+                    purgeModalFields();
+                    $($context.modalSelector + ' .modal-header-p').text('<?php ___('Create', true); ?>');
+
+                    $('.staff-select').each(function () { $(this).prop('selectedIndex', 0) });
+                    $($context.modalSelector).fadeIn();
+                });
+
+                var create = function () {
+                    $context = $parent;
+                    let modalInputFields = $context.accessorMap, values = {};
+
+                    for (let key in modalInputFields) {
+                        if (modalInputFields.hasOwnProperty(key)) {
+                            values[modalInputFields[key]] = $($context.getInputPrefix() + modalInputFields[key]).val();
+                        }
+                    }
+
+                    $.post($context.createEndpoint, {
+                        'action': $context.createEndpoint,
+                        'page': $context.createEndpoint.replace('admin.php?page=', ''),
+                        'values': values
+                    }, function () {
+                        setTimeout(function() {
+                            let prependix = window.location.href.substring(0, window.location.href.indexOf('#'));
+                            window.location.href = (prependix.length ? prependix : window.location.href) + '&notification=Successfully+saved' +'#'+ window.location.href.split('#')[1];
+                        }, 1);
+                    });
+                };
+
+                var purgeModalFields = function () {
+                    var modalInputFields = $context.accessorMap;
+                    for (let key in modalInputFields) {
+                        if (modalInputFields.hasOwnProperty(key)) {
+                            $($context.getInputPrefix() + modalInputFields[key]).val('');
+
+                            if ($context.imageResourceId instanceof Array) {
+                                let imageResourceIds = $context.imageResourceId;
+                                for (let key in imageResourceIds) {
+                                    if (imageResourceIds.hasOwnProperty(key)) {
+                                        let tmpImgSelector = imageResourceIds[key];
+                                        if (modalInputFields[key] === tmpImgSelector) {
+                                            if (imageResourceIds.length > 1) {
+                                                $('.each-' + tmpImgSelector).find('img').attr('src', '');
+                                            } else {
+                                                $('.staff-member-image').find('img').attr('src', '');
+                                            }
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (modalInputFields[key] === $context.imageResourceId) {
+                                    $('.staff-member-image').find('img').attr('src', '')
+                                }
+                            }
+
+                            $('.staff-member-image').find('img').attr('src', '');
+
+                            if ($($context.getInputPrefix() + modalInputFields[key]).is('select')) {
+                                let select = $($context.getInputPrefix() + modalInputFields[key]);
+                                select.val($($context.getInputPrefix() + modalInputFields + ' option:first').val());
+                            }
+
+                            $($context.saveSelector).attr('data-id', 0);
+                        }
+                    }
+                };
+
+                return $parent;
+            },
+        };
+
+        return $parent;
+    };
+
+    let hasParam = function(param) {
+        return (window.location.href.indexOf(param) > -1);
+    };
+
+    (function(){
+        getJsonResponse = function (response) {
+            var normalizedStr = response.substring(response.lastIndexOf('+!!!JSON!!!+') + 1, response.lastIndexOf('+!!!!JSON!!!!+')).replace('!!!JSON!!!+', '');
+            var normalizedStr = normalizedStr.replace(':email:', '@');
+            var parsed = JSON.parse(normalizedStr);
+            for (var key in parsed) {
+                try {
+                    if (parsed.hasOwnProperty(key)) {
+                        parsed[key] = JSON.parse(parsed[key]);
+                    }
+                } catch(e) {}
+            }
+
+            return parsed;
+        };
+
+        Hoverable = function () {
+            $('.hoverable > img').on({
+                mouseover: function() {
+                    $('.hoverable-img-'+$(this).attr('data-id')).fadeIn();
+                },
+
+                mouseout: function() {
+                    $('.hoverable-img-'+$(this).attr('data-id')).fadeOut();
+                }
+            });
+        };
+
+        preventAll = function (event) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            event.stopPropagation();
+        };
+
+        redirect = function(appendixes, returnAsResult = false) {
+            let redirectUrl = '<?php echo get_admin_url(); ?>admin.php?page=' + appendixes;
+            if (returnAsResult) {
+                return redirectUrl;
+            }
+
+            window.location.replace(redirectUrl);
+        };
+
+        Modal = function(selector = '', type = 1) {
+            var modalBox = $(selector);
+            if (type) {
+                return modalBox.fadeIn();
+            }
+
+            modalBox.fadeOut();
+        };
+
+        Sortable = function (modelName, normalizerWord, sortableSelector) {
+            $(sortableSelector).sortable({
+                placeholder: "ui-state-highlight-sponsor",
+                revert: true,
+                update: function (e) {
+                    var items = $(sortableSelector).sortable("toArray", {key: 'item[]'});
+                    console.log(items);
+                    for (var key in items) {
+                        items[key] = items[key].replace(normalizerWord, '');
+                    }
+
+                    var data = {
+                        'action': '<?php echo route('sortable_order', false);?>',
+                        'sorted_ids': items,
+                        'model_name': modelName,
+                        'page': '<?php echo route('sortable_order', false);?>'
+                    };
+
+                    $.post('<?php echo route('sortable_order');?>', data, function (response) {
+                        if (!getJsonResponse(response).success) {
+                            console.error('There was an error.');
+                        }
+                    });
+                },
+
+                helper: 'clone'
+            });
+        };
+
+        WpMedia = function(clickSelector, inputSelector, previewSelector) {
+            $(clickSelector).on('click', function (e) {
+                preventAll(e);
+
+                var bannerImage = wp.media.frames.file_frame = wp.media({
+                    title: '<?php echo ___('Choose a image'); ?>',
+                    button: { text: '<?php echo ___('Choose a image'); ?>'},
+                    multiple: false
+                });
+
+
+                bannerImage.on('select', function() {
+                    $(inputSelector).val(bannerImage.state().get('selection').first().toJSON().url);
+                    $(previewSelector).attr('src', bannerImage.state().get('selection').first().toJSON().url);
+                });
+
+                bannerImage.open();
+            });
+        };
+
+        DataTable = function(selector, options = {}) {
+            options.order = [];
+            $('#'+selector).DataTable(options)
+        };
+
+        DateTimePicker = function(selector, options = {}) {
+            $(selector)
+                .datetimepicker(options)
+                .attr('value', $(selector).val())
+            ;
+        };
+
+    }).call(this);
+</script>

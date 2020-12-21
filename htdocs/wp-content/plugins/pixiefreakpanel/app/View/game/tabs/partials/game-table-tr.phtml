@@ -1,0 +1,20 @@
+<tr id="tr-<?php echo $game->id; ?>">
+
+    <td class="tc"> <?php echo $game->id; ?> </td>
+
+    <td class="tc"> <?php echo $game->name; ?> </td>
+
+    <td class="tc">
+        <a class="edit-game btns" rel="tipsy"
+           title="<?php ___('Click here to edit this game item.', true) ?>"
+           data-id="<?php echo $game->id; ?>">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a data-id="<?php echo $game->id; ?>"
+           rel="tipsy"
+           title="<?php ___('Click here to remove this game item.', true) ?>"
+           class="remove-game btns">
+            <i class="fa fa-trash"></i>
+        </a>
+    </td>
+</tr>

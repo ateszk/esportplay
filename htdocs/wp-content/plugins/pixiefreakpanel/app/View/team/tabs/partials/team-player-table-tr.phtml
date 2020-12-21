@@ -1,0 +1,56 @@
+<tr id="tr-player-<?php echo $player->id; ?>">
+
+    <td class="tc"> <?php echo $player->id; ?> </td>
+
+    <td class="tc"> <?php echo $player->first_name; ?> </td>
+    <td class="tc"> <?php echo $player->last_name; ?> </td>
+    <td class="tc"> <?php echo $player->country; ?> </td>
+
+    <td class="tc"> <?php echo $player->team ? $player->team->name : ___('No Team'); ?> </td>
+
+    <td class="tc">
+        <div class="bgForImg hoverable">
+            <img src="<?php echo $player->avatar; ?>" class="hoverable-img hoverable-img-<?php echo $player->id; ?>" style="display: none">
+            <img src="<?php echo $player->avatar; ?>" style="max-width: 15%;" data-id="<?php echo $player->id; ?>">
+        </div>
+    </td>
+
+    <td class="tc">
+        <a class="manage-player-statistic btns" rel="tipsy"
+           title="<?php ___('Click here to customize player statistic.', true) ?>"
+           data-id="<?php echo $player->id; ?>">
+            <i class="fa fa-chart-pie"></i>
+        </a>
+    </td>
+
+    <td class="tc">
+        <a class="manage-gear btns" rel="tipsy"
+           title="<?php ___('Click here to manage player gear.', true) ?>"
+           data-id="<?php echo $player->id; ?>">
+            <i class="fa fa-gamepad"></i>
+        </a>
+        <a data-id="<?php echo $player->id; ?>"
+           rel="tipsy"
+           title="<?php ___('Click here to manage player streams.', true) ?>"
+           class="manage-streams btns">
+            <i class="fab fa-youtube"></i>
+        </a>
+    </td>
+
+    <td class="tc">
+
+        <?php post_slug_builder('player', $player->slug); ?>
+
+        <a class="edit-player btns" rel="tipsy"
+           title="<?php ___('Click here to edit this player.', true) ?>"
+           data-id="<?php echo $player->id; ?>">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a data-id="<?php echo $player->id; ?>"
+           rel="tipsy"
+           title="<?php ___('Click here to remove this player.', true) ?>"
+           class="remove-player btns">
+            <i class="fa fa-trash"></i>
+        </a>
+    </td>
+</tr>

@@ -1,0 +1,188 @@
+<script>
+    jQuery(document).ready(function() {
+        var datatable = null;
+        if ($('#wpbody-content > div.main-content > section > ul > li.admin-pick.active').text().replace(/\s/g, '').toLowerCase() === 'sponsors') {
+            datatable = $('#datatableSponsor').DataTable();
+        }
+
+        $('a[href="#sponsors"]').on('click', function() {
+            if (!datatable) {
+                setTimeout(function() {
+                    datatable = $('#datatableSponsor').DataTable();
+                }, 1);
+            }
+        });
+
+        $('.sortable').sortable({
+            placeholder: "ui-state-highlight-sponsor",
+            revert: true,
+            update: function (e) {
+                 var items = $('.sortable').sortable("toArray", {key: 'item[]'}),
+                 data = {
+                     'action': '<?php echo route('sponsor_update', false);?>',
+                     'sortedIds': items,
+                     'page': '<?php echo route('sponsor_update', false);?>',
+                     'task': 'order'
+                 };
+
+                 $.post('<?php echo route('sponsor_update');?>', data, function () {
+                     console.log('Saved');
+                 });
+             },
+
+            helper: 'clone'
+        });
+
+        Hoverable();
+
+        $('#sponsor-about').on('keyup', function() {
+            if (this.value.length > 145) {
+                alert('About description for sponsor can\'t be more thant 145 characters.');
+                return;
+            }
+        });
+
+        $('#add-sponsor').on('click', function(e) {
+            preventAll(e);
+
+            purgeModalFields();
+
+            $('.modal-header-p').text('<?php ___('Create Sponsor', true); ?>');
+            Modal('#modal-sponsor');
+        });
+
+        WpMedia('.new-image', '#sponsor-logo', '.staff-member-image > img');
+
+        var commonAccessorMap = ['name', 'logo', 'url', 'about', 'type'],
+            socialAccessorMap = ['facebook', 'instagram', 'twitter', 'twitch', 'steam']
+        ;
+
+        $('.save-sponsor').on('click', function(e) {
+            preventAll(e);
+
+            if ($('#sponsor-about').val().length > 145) {
+                alert('About description for sponsor can\'t be more thant 145 characters.');
+                return;
+            }
+
+            // Data id is not set so we should create new member.
+            var sponsorId = $(this).attr('data-id');
+            if (sponsorId == '0') {
+                return createNewSponsor();
+            }
+
+            var modalInputFields = commonAccessorMap.concat(socialAccessorMap);
+            var values = {};
+            for (var key in modalInputFields) {
+                values[modalInputFields[key]] = $('#sponsor-' + modalInputFields[key]).val();
+            }
+
+            $.post('<?php echo route('sponsor_updateSponsor') ;?>', {
+                'action': '<?php echo route('sponsor_updateSponsor', false) ;?>',
+                'sponsorId': sponsorId,
+                'page': '<?php echo route('sponsor_updateSponsor', false) ;?>',
+                'values': values
+            }, function() {
+                purgeModalFields();
+                $('#modal-sponsor').fadeOut();
+                setTimeout(function() {
+                    window.location.reload(false);
+                }, 1);
+            });
+        });
+
+        createNewSponsor = function() {
+            var modalInputFields = commonAccessorMap.concat(socialAccessorMap);
+            var values = {};
+
+            for (var key in modalInputFields) {
+                if (modalInputFields.hasOwnProperty(key)) {
+                    values[modalInputFields[key]] = $('#sponsor-' + modalInputFields[key]).val();
+                }
+            }
+
+            $.post('<?php echo route('sponsor_createSponsor') ;?>', {
+                'action': '<?php echo route('sponsor_createSponsor', false) ;?>',
+                'page': '<?php echo route('sponsor_createSponsor', false) ;?>',
+                'values': values
+            }, function(response) {
+                var responseHtml = getJsonResponse(response);
+                $('#datatableSponsor tbody tr:last').after(responseHtml[0]);
+
+                window.location.reload(false);
+                Modal('#modal-sponsor', 0);
+            });
+        };
+
+        $('#datatableSponsor').on('click', '.remove-sponsor', function(e) {
+            preventAll(e);
+            var sponsorId = $(this).data('id');
+            $.post('<?php echo route('sponsor_removeSponsor') ;?>', {
+                'action': '<?php echo route('sponsor_removeSponsor', false) ;?>',
+                'sponsorId': sponsorId,
+                'page': '<?php echo route('sponsor_removeSponsor', false) ;?>'
+            }, function() {
+                $('#'+sponsorId).fadeOut();
+            });
+        });
+
+        $('#datatableSponsor').on('click', '.edit-sponsor', function(e) {
+            preventAll(e);
+            purgeModalFields();
+            
+            var sponsorId = $(this).attr('data-id'),
+                data = {
+                    'action': '<?php echo route('sponsor_getSponsor', false) ;?>',
+                    'sponsorId': sponsorId,
+                    'page': '<?php echo route('sponsor_getSponsor', false) ;?>'
+                };
+
+            $('.save-sponsor').attr('data-id', sponsorId);
+            $('.modal-header-p').text('<?php ___('Edit Sponsor', true); ?>');
+
+            $.post('<?php echo route('sponsor_getSponsor') ;?>', data, function(response) {
+                var response = getJsonResponse(response);
+                for (var key in commonAccessorMap) {
+                    var tmpAccessor = commonAccessorMap[key];
+                    if (response.hasOwnProperty(tmpAccessor) && response[tmpAccessor] != null) {
+                        $('#sponsor-'+tmpAccessor).val(response[tmpAccessor]);
+                        if (tmpAccessor === 'logo') {
+                            $(".staff-member-image").find('img').attr('src', response[tmpAccessor]);
+                        }
+                    }
+                }
+
+                for (var key in socialAccessorMap) {
+                    var tmpAccessor = socialAccessorMap[key];
+                    if (response.hasOwnProperty('social') && response.social) {
+                        if (response.social.hasOwnProperty(tmpAccessor)) {
+                            $('#sponsor-'+tmpAccessor).val(response.social[tmpAccessor]);
+                        }
+
+                        if (tmpAccessor === 'type') {
+                            $('#sponsor-type option:eq('+response[tmpAccessor]+')').prop('selected', true)
+                        }
+                    }
+                }
+
+                $('#modal-sponsor').fadeIn();
+            });
+        });
+
+        purgeModalFields = function() {
+            var modalInputFields = commonAccessorMap.concat(socialAccessorMap);
+            for (var key in modalInputFields) {
+                $('#sponsor-'+modalInputFields[key]).val('');
+                if (modalInputFields[key] === 'logo') {
+                    $(".staff-member-image").find('img').attr('src', '')
+                }
+
+                if (modalInputFields[key] === 'type') {
+                    $('#sponsor-type').val(1);
+                }
+
+                $('.save-sponsor').attr('data-id', 0);
+            }
+        };
+    });
+</script>

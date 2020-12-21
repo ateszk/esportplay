@@ -1,0 +1,183 @@
+<script>
+    jQuery(document).ready(function() {
+        DateTimePicker('.datepicker', {format: 'Y-m-d H:i:s'});
+        DataTable('datatableTeam');
+        Hoverable();
+        WpMedia('.pick12', '#team-team_logo', '.s12 > img');
+        WpMedia('.pick23', '#team-cover', '.s23 > img');
+        WpMedia('.pick34', '#team-thumbnail', '.s345 > img');
+        WpMedia('#ssingle', '#team-team_banner_image', '.image-preview-s > img');
+        WpMedia('#lsingle', '#teams-teams_banner_image', '.image-preview-ss > img');
+        ModalResolver()
+            .setTableSelector('#datatableTeam')
+            .setModalSelector('#modal-team')
+            .setInputPrefix('#team-')
+            .setCreateSelector('#add-team')
+            .setEditSelector('.edit-team')
+
+            .setImageResourceId('team_logo')
+            .setImageResourceId('cover')
+            .setImageResourceId('thumbnail')
+
+            .setRemoveSelector('.remove-team')
+            .setSaveSelector('.save-team')
+            .setPrimaryKeySelector('teamId')
+            .setCreateEndpoint('<?php echo route('team_createTeam') ;?>')
+            .setEditEndpoint('<?php echo route('team_getTeam') ;?>')
+            .setUpdateEndpoint('<?php echo route('team_updateTeam') ;?>')
+            .setRemoveEndpoint('<?php echo route('team_removeTeam'); ?>')
+            .setTableRowSelector('#tr-')
+            .setAccessorMap([
+                'team_logo',
+                'cover',
+                'thumbnail',
+                'name',
+                'short_name',
+                'country',
+                'subtitle',
+                'game_id',
+                'about',
+                'my_team',
+                'year_founded',
+                'facebook',
+                'instagram',
+                'twitch',
+                'steam'
+            ])
+            .init()
+        ;
+
+        Sortable('<?php echo class_slasher(\PixieFreakPanel\Model\Team::class);?>', 'tr-', '.sortableTeam');
+
+        ModalResolver()
+            .setTableSelector('#datatableTeam')
+            .setModalSelector('#modal-stats')
+            .setInputPrefix('#team-')
+            .setRemoveSelector('.remove-team')
+            .setEditSelector('.manage-statistic')
+            .setSaveSelector('.save-stats')
+            .setPrimaryKeySelector('teamId')
+            .setEditEndpoint('<?php echo route('team_getTeamStatistic') ;?>')
+            .setUpdateEndpoint('<?php echo route('team_updateTeamStatistic') ;?>')
+            .setTableRowSelector('#tr-')
+            .setAccessorMap([
+                'win',
+                'loses',
+                'ties'
+            ])
+            .init()
+        ;
+
+        $('#datatableTeam').on('click', '.manage-team-streams', function() {
+            let teamId = $(this).attr('data-id');
+            $('.save-team-stream').attr('data-id', teamId);
+            let data = {
+                'action': '<?php echo route('team_getTeamStream', false) ;?>',
+                'teamId': teamId,
+                'page': '<?php echo route('team_getTeamStream', false) ;?>'
+            };
+
+            $.post('<?php echo route('team_getTeamStream') ;?>', data, function(response) {
+                let streamIDs = getJsonResponse(response);
+                $('.js-example-basic-multiple').select2();
+                $('#team-stream').val(streamIDs).trigger('change');
+                $('#modal-team-stream').fadeIn();
+            });
+        });
+
+        $('.save-team-stream').on('click', function(e) {
+            preventAll(e);
+
+            let teamId = $(this).attr('data-id'), values = $('#team-stream').val();
+            let data = {
+                'action': '<?php echo route('team_updateTeamStream', false) ;?>',
+                'teamId': teamId,
+                'values': values,
+                'page': '<?php echo route('team_updateTeamStream', false) ;?>'
+            };
+
+            $.post('<?php echo route('team_updateTeamStream') ;?>', data, function() {
+                $('#modal-team-stream').fadeOut();
+                setTimeout(function () {
+                    location.reload();
+                }, 1)
+            });
+        });
+
+        $('#datatableTeam').on('click', '.manage-team-players', function() {
+            let teamId = $(this).attr('data-id');
+            $('.save-team-players').attr('data-id', teamId);
+            let data = {
+                'action': '<?php echo route('team_getTeamPlayer', false) ;?>',
+                'teamId': teamId,
+                'page': '<?php echo route('team_getTeamPlayer', false) ;?>'
+            };
+
+            $.post('<?php echo route('team_getTeamPlayer') ;?>', data, function(response) {
+                let playerIDS = getJsonResponse(response);
+                $('.js-example-basic-multiple').select2();
+                $('#team-players').val(playerIDS).trigger('change');
+                $('#modal-team-players').fadeIn();
+            });
+        });
+
+        $('.save-team-players').on('click', function(e) {
+            preventAll(e);
+
+            let teamId = $(this).attr('data-id'), values = $('#team-players').val();
+            let data = {
+                'action': '<?php echo route('team_updateTeamPlayer', false) ;?>',
+                'teamId': teamId,
+                'values': values,
+                'page': '<?php echo route('team_updateTeamPlayer', false) ;?>'
+            };
+
+            $.post('<?php echo route('team_updateTeamPlayer') ;?>', data, function() {
+                $('#modal-team-players').fadeOut();
+                setTimeout(function () {
+                    location.reload();
+                }, 1)
+            });
+        });
+
+
+        $('#datatableTeam').on('click', '.manage-team-achievements', function() {
+            let teamId = $(this).attr('data-id');
+            $('.save-team-achievements').attr('data-id', teamId);
+            let data = {
+                'action': '<?php echo route('team_getTeamAchievement', false) ;?>',
+                'teamId': teamId,
+                'page': '<?php echo route('team_getTeamAchievement', false) ;?>'
+            };
+
+            $.post('<?php echo route('team_getTeamAchievement') ;?>', data, function(response) {
+                let playerIDS = getJsonResponse(response);
+                $('.js-example-basic-multiple').select2();
+                $('#team-achievements').val(playerIDS).trigger('change');
+                $('#modal-team-achievements').fadeIn();
+            });
+        });
+
+        $('.save-team-achievements').on('click', function(e) {
+            preventAll(e);
+
+            let teamId = $(this).attr('data-id'), values = $('#team-achievements').val();
+            let data = {
+                'action': '<?php echo route('team_updateTeamAchievement', false) ;?>',
+                'teamId': teamId,
+                'values': values,
+                'page': '<?php echo route('team_updateTeamAchievement', false) ;?>'
+            };
+
+            $.post('<?php echo route('team_updateTeamAchievement') ;?>', data, function() {
+                $('#modal-team-achievements').fadeOut();
+                setTimeout(function () {
+                    location.reload();
+                }, 1)
+            });
+        });
+
+        $('input[name="player_cta_player[icon]"]').iconpicker({ placement: 'top' });
+        $('.iconpicker-item').on('click', (e) => { e.preventDefault(e); });
+    });
+</script>

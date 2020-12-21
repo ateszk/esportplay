@@ -1,0 +1,21 @@
+<script>
+    jQuery(document).ready(function() {
+        $('#select-banner-image').on('click', function (e) {
+            preventAll(e);
+
+            var bannerImage = wp.media.frames.file_frame = wp.media({
+                title: '<?php echo ___('Choose a image'); ?>',
+                button: { text: '<?php echo ___('Choose a image'); ?>'},
+                multiple: false
+            });
+
+
+            bannerImage.on('select', function() {
+                $('#banner-image').val(bannerImage.state().get('selection').first().toJSON().url);
+                $('.img-preview-bnr').attr('src', bannerImage.state().get('selection').first().toJSON().url);
+            });
+
+            bannerImage.open();
+        });
+    });
+</script>

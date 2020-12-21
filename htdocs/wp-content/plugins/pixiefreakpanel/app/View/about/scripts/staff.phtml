@@ -1,0 +1,157 @@
+<script>
+    jQuery(document).ready(function() {
+        var commonAccessorMap = ['avatar', 'name', 'label', 'role', 'staff_category_id'],
+            socialAccessorMap = ['facebook', 'instagram', 'twitter', 'linkedin']
+        ;
+
+        $('#datatable').on('click', '.edit-staff-member', function(e) {
+            preventAll(e);
+
+            purgeModalFields();
+
+
+            var memberId = $(this).data('id'),
+                data = {
+                'action': '<?php echo route('about_getStaffMember', false) ;?>',
+                'staffId': memberId,
+                'page': '<?php echo route('about_getStaffMember', false) ;?>'
+            };
+
+            $('.save-staff-member').attr('data-id', memberId);
+            $('.modal-header-p').text('<?php ___('Edit Staff member', true); ?>');
+
+            $.post('<?php echo route('about_getStaffMember') ;?>', data, function(response) {
+                var response = getJsonResponse(response);
+                for (var key in commonAccessorMap) {
+                    var tmpAccessor = commonAccessorMap[key];
+                    if (response.hasOwnProperty(tmpAccessor) && response[tmpAccessor] != null) {
+                        $('#staff-'+tmpAccessor).val(response[tmpAccessor]);
+                        if (tmpAccessor === 'avatar') {
+                            $(".staff-member-image").find('img').attr('src', response[tmpAccessor]);
+                        }
+                    }
+                }
+
+                for (var key in socialAccessorMap) {
+                    var tmpAccessor = socialAccessorMap[key];
+                    if (response.hasOwnProperty('socials') && response.socials) {
+                        if (response.socials.hasOwnProperty(tmpAccessor)) {
+                            $('#staff-'+tmpAccessor).val(response.socials[tmpAccessor]);
+                        }
+
+                        if (tmpAccessor === 'staff_category_id') {
+                            $('#staff-staff_category_id option:eq('+response[tmpAccessor]+')').prop('selected', true)
+                        }
+                    }
+                }
+
+                $('#modal-staff').fadeIn();
+            });
+        });
+
+        $('.save-staff-member').on('click', function(event) {
+            preventAll(event);
+
+            // Data id is not set so we should create new member.
+            var staffMemberId = $(this).attr('data-id');
+            if (staffMemberId == '0') {
+                return createNewStaffMember();
+            }
+
+            var modalInputFields = commonAccessorMap.concat(socialAccessorMap);
+            var values = {};
+            for (var key in modalInputFields) {
+                values[modalInputFields[key]] = $('#staff-' + modalInputFields[key]).val();
+            }
+
+            $.post('<?php echo route('about_updateStaffMember') ;?>', {
+                'action': '<?php echo route('about_updateStaffMember', false) ;?>',
+                'staffId': staffMemberId,
+                'page': '<?php echo route('about_updateStaffMember', false) ;?>',
+                'values': values
+            }, function() {
+                purgeModalFields();
+                $('#modal-staff').fadeOut();
+                window.location.reload(false);
+            });
+        });
+
+        $(".new-image").on('click tap', function(event) {
+            preventAll(event);
+
+            var memberImage = wp.media.frames.file_frame = wp.media({
+                title: '<?php echo ___('Choose a image'); ?>',
+                button: { text: '<?php echo ___('Choose a image'); ?>'},
+                multiple: false
+            });
+
+            var input = $('#staff-avatar');
+            memberImage.on('select', function() {
+                var attr = memberImage.state().get('selection').first().toJSON();
+                input.val(attr.url);
+                $('.staff-member-image').find('img').attr('src', attr.url);
+            });
+
+            memberImage.open();
+        });
+
+        $('.remove-member').on('click', function(event) {
+            preventAll(event);
+
+            var staffId = $(this).data('id');
+            $.post('<?php echo route('about_removeStaffMember') ;?>', {
+                'action': '<?php echo route('about_removeStaffMember', false) ;?>',
+                'staffId': staffId,
+                'page': '<?php echo route('about_removeStaffMember', false) ;?>'
+            }, function() {
+                $('#tr-'+staffId).fadeOut();
+            });
+        });
+
+        $('#add-member').on('click', function(event) {
+            preventAll(event);
+
+            purgeModalFields();
+
+            $('.modal-header-p').text('<?php ___('Create New Staff member', true); ?>');
+            $("#staff-staff_category_id").val($("#staff-staff_category_id option:first").val()).trigger('change');
+
+            $('#modal-staff').fadeIn();
+        });
+
+
+        createNewStaffMember = function() {
+            var modalInputFields = commonAccessorMap.concat(socialAccessorMap);
+            var values = {};
+
+            for (var key in modalInputFields) {
+                values[modalInputFields[key]] = $('#staff-' + modalInputFields[key]).val();
+            }
+
+            $.post('<?php echo route('about_createStaffMember') ;?>', {
+                'action': '<?php echo route('about_createStaffMember', false) ;?>',
+                'page': '<?php echo route('about_createStaffMember', false) ;?>',
+                'values': values
+            }, function() {
+                $('#modal-staff').fadeOut();
+                window.location.reload(false);
+            });
+        };
+
+        purgeModalFields = function() {
+            var modalInputFields = commonAccessorMap.concat(socialAccessorMap);
+            for (var key in modalInputFields) {
+                $('#staff-'+modalInputFields[key]).val('');
+                if (modalInputFields[key] === 'avatar') {
+                    $(".staff-member-image").find('img').attr('src', '')
+                }
+
+                if (modalInputFields[key] === 'staff_category_id') {
+                    $('#staff_category_id option:eq(1)')
+                }
+
+                $('.save-staff-member').attr('data-id', 0);
+            }
+        };
+    });
+</script>

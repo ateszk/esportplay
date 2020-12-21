@@ -1,0 +1,30 @@
+<script>
+    jQuery(document).ready(function() {
+        DataTable('datatableSlider');
+        WpMedia('.new-image', '#slide-image', '.staff-member-image-main > img');
+        WpMedia('.new-thumbnail-image', '#slide-thumbnail', '.staff-member-image-thumbnail > img');
+        ModalResolver()
+            .setTableSelector('#datatableSlider')
+            .setModalSelector('#modal-slide')
+            .setInputPrefix('#slide-')
+            .setCreateSelector('#add-slide')
+            .setEditSelector('.edit-slide')
+
+            .setImageResourceId('image')
+            .setImageResourceId('thumbnail')
+
+            .setRemoveSelector('.remove-slide')
+            .setSaveSelector('.save-slide')
+            .setPrimaryKeySelector('slideId')
+            .setCreateEndpoint('<?php echo route('general_createSlider') ;?>')
+            .setEditEndpoint('<?php echo route('general_getSlider') ;?>')
+            .setUpdateEndpoint('<?php echo route('general_updateSlider') ;?>')
+            .setRemoveEndpoint('<?php echo route('general_removeSlider'); ?>')
+            .setTableRowSelector('#tr-')
+            .setAccessorMap(['heading_text', 'tag', 'image', 'thumbnail', 'cta_text', 'cta_link'])
+            .init()
+        ;
+
+        Sortable('<?php echo class_slasher(\PixieFreakPanel\Model\Slider::class);?>', 'tr-', '.sortableSlider');
+    });
+</script>

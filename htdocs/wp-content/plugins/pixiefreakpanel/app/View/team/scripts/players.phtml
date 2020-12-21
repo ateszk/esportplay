@@ -1,0 +1,187 @@
+<script>
+    jQuery(document).ready(function() {
+        DateTimePicker('.datepicker', {format: 'Y-m-d H:i:s'});
+        DataTable('datatablePlayer');
+        Hoverable();
+        WpMedia('.pick1', '#player-avatar', '.player1 > img');
+        WpMedia('.pick2', '#player-banner', '.player2 > img');
+        WpMedia('.pick3', '#player-avatar_transparent', '.player3 > img');
+        WpMedia('.pick4', '#player-cover', '.player4 > img');
+        ModalResolver()
+            .setTableSelector('#datatablePlayer')
+            .setModalSelector('#modal-player')
+            .setInputPrefix('#player-')
+            .setCreateSelector('#add-player')
+            .setEditSelector('.edit-player')
+
+            .setImageResourceId('avatar')
+            .setImageResourceId('banner')
+            .setImageResourceId('avatar_transparent')
+            .setImageResourceId('cover')
+
+            .setRemoveSelector('.remove-player')
+            .setSaveSelector('.save-player')
+            .setPrimaryKeySelector('playerId')
+            .setCreateEndpoint('<?php echo route('player_createPlayer') ;?>')
+            .setEditEndpoint('<?php echo route('player_getPlayer') ;?>')
+            .setUpdateEndpoint('<?php echo route('player_updatePlayer') ;?>')
+            .setRemoveEndpoint('<?php echo route('player_removePlayer'); ?>')
+            .setTableRowSelector('#tr-player-')
+            .setAccessorMap([
+                'avatar',
+                'avatar_transparent',
+                'banner',
+                'cover',
+                'nickname',
+                'first_name',
+                'last_name',
+                'country',
+                'birth_date',
+                'biography',
+                'team_id',
+                'role',
+                'facebook',
+                'instagram',
+                'discord',
+                'steam',
+                'twitch',
+                'twitter'
+            ])
+            .init()
+        ;
+
+        Sortable('<?php echo class_slasher(\PixieFreakPanel\Model\Player::class);?>', 'tr-player-', '.sortablePlayer');
+
+        $('#datatablePlayer').on('click', '.manage-player-statistic', function(e) {
+            let playerId = $(this).attr('data-id');
+            $.post('<?php echo route('player_getPlayerStatistic') ;?>', {
+                'action': '<?php echo route('player_getPlayerStatistic', false) ;?>',
+                'playerId': playerId,
+                'page': '<?php echo route('player_getPlayerStatistic', false) ;?>'
+            }, function(response) {
+                let statsCont = $('#tr-player-stats');
+                statsCont.empty();
+
+                let modalAppendix = getJsonResponse(response)[0];
+                statsCont.append(modalAppendix);
+
+                $('.save-player-statistic').attr('data-id', playerId);
+                $('#modal-player-statistic').fadeIn();
+            });
+        });
+
+        $('.save-player-statistic').on('click', function(e) {
+            preventAll(e);
+
+            let values = [];
+            $('.stats-input').each(function() { values.push($(this).val()); });
+
+            let playerId = $(this).attr('data-id');
+            let data = {
+                'action': '<?php echo route('player_updatePlayerStatistic', false) ;?>',
+                'values': values,
+                'playerId': playerId,
+                'page': '<?php echo route('player_updatePlayerStatistic', false) ;?>'
+            };
+
+            $.post('<?php echo route('player_updatePlayerStatistic') ;?>', data, function() {
+                setTimeout(function () {
+                    location.reload();
+                }, 1);
+
+                $('#modal-player-statistic').fadeOut();
+            });
+        });
+
+        $('#tr-player-stats').on('click tap', '.stats-icon', function(event) {
+            preventAll(event);
+
+            let statsIcon = wp.media.frames.file_frame = wp.media({
+                title: '<?php echo ___('Choose a image'); ?>',
+                button: { text: '<?php echo ___('Choose a image'); ?>'},
+                multiple: false
+            }), itemId = $(this).data('id'), input = $('#icon-'+itemId);
+
+            statsIcon.on('select', function() {
+                let attr = statsIcon.state().get('selection').first().toJSON();
+                input.val(attr.url);
+                $('.stats-modal-preview' +itemId).find('img').attr('src', attr.url);
+            });
+
+            statsIcon.open();
+        });
+
+
+        $('#datatablePlayer').on('click', '.manage-gear', function() {
+            let playerId = $(this).attr('data-id');
+            $('.save-player-gear').attr('data-id', playerId);
+            let data = {
+                'action': '<?php echo route('player_getPlayerGear', false) ;?>',
+                'playerId': playerId,
+                'page': '<?php echo route('player_getPlayerGear', false) ;?>'
+            };
+
+            $.post('<?php echo route('player_getPlayerGear') ;?>', data, function(response) {
+                let gearIds = getJsonResponse(response);
+                $('.js-example-basic-multiple').select2();
+                $('#player-gear').val(gearIds).trigger('change');
+                $('#modal-player-gear').fadeIn();
+            });
+        });
+
+        $('.save-player-gear').on('click', function(e) {
+            preventAll(e);
+
+            let playerId = $(this).attr('data-id'), values = $('#player-gear').val();
+            let data = {
+                'action': '<?php echo route('player_updatePlayerGear', false) ;?>',
+                'playerId': playerId,
+                'values': values,
+                'page': '<?php echo route('player_updatePlayerGear', false) ;?>'
+            };
+
+            $.post('<?php echo route('player_updatePlayerGear') ;?>', data, function(response) {
+                $('#modal-player-gear').fadeOut();
+                setTimeout(function () {
+                    location.reload();
+                }, 1)
+            });
+        });
+
+        $('#datatablePlayer').on('click', '.manage-streams', function() {
+            let playerId = $(this).attr('data-id');
+            $('.save-player-stream').attr('data-id', playerId);
+            let data = {
+                'action': '<?php echo route('player_getPlayerStream', false) ;?>',
+                'playerId': playerId,
+                'page': '<?php echo route('player_getPlayerStream', false) ;?>'
+            };
+
+            $.post('<?php echo route('player_getPlayerStream') ;?>', data, function(response) {
+                let streamIDs = getJsonResponse(response);
+                $('.js-example-basic-multiple').select2();
+                $('#player-stream').val(streamIDs).trigger('change');
+                $('#modal-player-stream').fadeIn();
+            });
+        });
+
+        $('.save-player-stream').on('click', function(e) {
+            preventAll(e);
+
+            let playerId = $(this).attr('data-id'), values = $('#player-stream').val();
+            let data = {
+                'action': '<?php echo route('player_updatePlayerStream', false) ;?>',
+                'playerId': playerId,
+                'values': values,
+                'page': '<?php echo route('player_updatePlayerStream', false) ;?>'
+            };
+
+            $.post('<?php echo route('player_updatePlayerStream') ;?>', data, function() {
+                $('#modal-player-stream').fadeOut();
+                setTimeout(function () {
+                    location.reload();
+                }, 1)
+            });
+        });
+    });
+</script>

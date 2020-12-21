@@ -1,0 +1,51 @@
+<tr id="<?php echo $sponsor->id; ?>">
+    <td class="tc">
+        <i class="fa fa-arrows-alt" style="margin-left: 0;"></i>
+    </td>
+    <td class="tc"><?php echo $sponsor->id; ?></td>
+    <td class="tc">
+        <?php echo $sponsor->name; ?>
+    </td>
+    <td class="tc">
+        <div class="bgForImg hoverable">
+            <img src="<?php echo $sponsor->logo; ?>" class="hoverable-img hoverable-img-<?php echo $sponsor->id; ?>" style="display: none">
+            <img src="<?php echo $sponsor->logo; ?>" style="max-width: 15%;" data-id="<?php echo $sponsor->id; ?>">
+        </div>
+    </td>
+    <!--<td class="tc">
+                                <a href="<?php /*echo $sponsor->url; */?>">
+                                    <?php /*echo $sponsor->url; */?>
+                                </a>
+                            </td>-->
+    <td class="tc">
+        <?php if (!empty(($socials = json_decode($sponsor->social, true)))): ?>
+            <?php foreach ($socials as $key => $social): ?>
+                <?php if (!empty(trim($social))): ?>
+                    <a href="<?php echo $social; ?>" target="_blank">
+                        <i class="fab fa-<?php echo $key; ?>"></i>
+                    </a>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </td>
+    <td class="tc">
+        <?php if ($sponsor->type == \PixieFreakPanel\Model\Sponsor::TYPE_DEFAULT): ?>
+            <?php ___('Default', true); ?>
+        <?php else: ?>
+            <?php ___('Head Sponsor', true); ?>
+        <?php endif; ?>
+    </td>
+    <td class="tc">
+        <a class="edit-sponsor btns" rel="tipsy"
+           title="<?php ___('Click here to edit this sponsor.', true) ?>"
+           data-id="<?php echo $sponsor->id; ?>">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a data-id="<?php echo $sponsor->id; ?>"
+           rel="tipsy"
+           title="<?php ___('Click here to remove this sponsor.', true) ?>"
+           class="remove-sponsor btns">
+            <i class="fa fa-trash"></i>
+        </a>
+    </td>
+</tr>

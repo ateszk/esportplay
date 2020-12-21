@@ -1,0 +1,39 @@
+<div id="modal-achievement" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p"><?php echo ___('Edit Achievement'); ?></p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Thumbnail', true); ?></h4>
+                </div>
+                <div class="staff-member-image achievements each-avatar">
+                    <img src="">
+                    <input type="hidden" value="" id="achievement-thumbnail">
+                    <input type="button" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary new-image achievement-wpmedia"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Name', true); ?>" id="achievement-name">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-achievement"
+                   data-id="0"
+            >
+        </div>
+    </div>
+</div>

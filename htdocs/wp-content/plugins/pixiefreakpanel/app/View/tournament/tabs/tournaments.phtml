@@ -1,0 +1,45 @@
+<section id="tournaments" class="admin-section">
+    <form class="footer-options-form">
+        <input type="hidden" name="task" value="general_settings">
+        <h2><?php esc_html_e('Tournaments', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <input type="button" class="button button-secondary btn-right" value="<?php ___('Add Tournament', true); ?>" id="add-tournament">
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table id="datatableTournament" class="widefat fixed" cellspacing="0">
+            <thead>
+            <tr>
+                <th class="tc"><?php ___('ID', true) ?></th>
+                <th class="tc"><?php ___('Name', true) ?></th>
+                <th class="tc"><?php ___('Cover', true) ?></th>
+                <th class="tc"><?php ___('Location', true) ?></th>
+                <th class="tc"><?php ___('Start Date', true) ?></th>
+                <th class="tc"><?php ___('Game', true) ?></th>
+                <th class="tc"><?php ___('Status', true) ?></th>
+                <th class="tc"><?php ___('Teams', true) ?></th>
+                <th class="tc"><?php ___('Brackets', true) ?></th>
+                <th class="tc"><?php ___('Action', true) ?></th>
+            </tr>
+            </thead>
+            <tbody class="sortable">
+            <?php if ($tournaments->isNotEmpty()): ?>
+
+                <?php foreach ($tournaments as $tournament): ?>
+
+                    <?php include (__DIR__ . '/partials/tournament-table-tr.phtml'); ?>
+
+                <?php endforeach; ?>
+
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </form>
+</section>
+
+<?php include_once (__DIR__ . '/partials/tournament-modal.phtml'); ?>
+<?php include_once (__DIR__ . '/partials/tournament-team-modal.phtml'); ?>
+
+<?php scripts(__DIR__, 'tournaments'); ?>

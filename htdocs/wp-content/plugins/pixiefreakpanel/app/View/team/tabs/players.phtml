@@ -1,0 +1,62 @@
+<section id="players" class="admin-section">
+    <form method="POST" class="footer-options-form">
+        <input type="hidden" name="task" value="general_settings">
+        <h2><?php esc_html_e('Players', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <input type="button" class="button button-secondary btn-right" value="<?php ___('Add Player', true); ?>" id="add-player">
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table id="datatablePlayer" class="widefat fixed" cellspacing="0">
+            <thead>
+            <tr>
+                <th class="tc"><?php ___('ID', true) ?></th>
+                <th class="tc"><?php ___('First Name', true) ?></th>
+                <th class="tc"><?php ___('Last Name', true) ?></th>
+                <th class="tc"><?php ___('Country', true) ?></th>
+                <th class="tc"><?php ___('Team', true) ?></th>
+                <th class="tc"><?php ___('Avatar', true) ?></th>
+                <th class="tc"><?php ___('Statistic', true) ?></th>
+                <th class="tc"><?php ___('Streams/Gear', true) ?></th>
+                <th class="tc"><?php ___('Action', true) ?></th>
+            </tr>
+            </thead>
+            <tbody class="sortable sortablePlayer">
+            <?php if ($players->isNotEmpty()): ?>
+
+                <?php foreach ($players as $player): ?>
+		            <?php
+		            if (!empty($player->team = \PixieFreakPanel\Model\Player::query()->team($player))) {
+			            $player->team = $player->team[0];
+		            }
+		            ?>
+
+                    <?php include (__DIR__ . '/partials/team-player-table-tr.phtml'); ?>
+
+                <?php endforeach; ?>
+
+            <?php endif; ?>
+            </tbody>
+        </table>
+
+        <?php include_once (__DIR__ . '/partials/team-player-stats-modal.phtml'); ?>
+    </form>
+</section>
+
+<?php
+
+    include_once (__DIR__ . '/partials/team-player-modal.phtml');
+
+    include_once (__DIR__ . '/partials/team-stats-modal.phtml');
+
+    include_once (__DIR__ . '/partials/team-player-gear-modal.phtml');
+
+    include_once (__DIR__ . '/partials/team-player-stream-modal.phtml');
+
+    include_once (__DIR__ . '/partials/team-players-modal.phtml');
+
+    scripts(__DIR__, 'players');
+
+?>

@@ -1,0 +1,33 @@
+<tr id="tr-<?php echo $match->id; ?>">
+
+    <td class="tc"><?php echo $match->id; ?></td>
+
+    <td class="tc">
+        <?php
+            $game = \PixieFreakPanel\Model\Game::query()->find($match->game_id);
+            echo $game ? $game->name : 'None';
+        ?>
+    </td>
+
+    <td class="tc">
+        <?php echo $match->team_a_name; ?>
+    </td>
+
+    <td class="tc">
+        <?php echo $match->team_b_name; ?>
+    </td>
+
+    <td class="tc">
+        <a class="edit-match btns" rel="tipsy"
+           title="<?php ___('Click here to edit this match item.', true) ?>"
+           data-id="<?php echo $match->id; ?>">
+            <i class="fa fa-edit"></i>
+        </a>
+        <a data-id="<?php echo $match->id; ?>"
+           rel="tipsy"
+           title="<?php ___('Click here to remove this match item.', true) ?>"
+           class="remove-match btns">
+            <i class="fa fa-trash"></i>
+        </a>
+    </td>
+</tr>

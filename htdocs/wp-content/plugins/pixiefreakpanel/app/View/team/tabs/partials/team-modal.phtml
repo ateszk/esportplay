@@ -1,0 +1,115 @@
+<div id="modal-team" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p"><?php echo ___('Edit Team'); ?></p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Logo', true); ?></h4>
+                </div>
+                <div class="staff-member-image s12 each-team_logo">
+                    <img src="">
+                    <input type="hidden" value="" id="team-team_logo">
+                    <input type="submit" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary save-stats new-image pick12"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Cover', true); ?></h4>
+                </div>
+                <div class="staff-member-image s23 each-cover">
+                    <img src="">
+                    <input type="hidden" value="" id="team-cover">
+                    <input type="submit" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary save-stats new-image pick23"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Thumbnail', true); ?></h4>
+                </div>
+                <div class="staff-member-image s345 each-thumbnail">
+                    <img src="">
+                    <input type="hidden" value="" id="team-thumbnail">
+                    <input type="submit" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary save-stats new-image pick34"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Name', true); ?>" id="team-name">
+
+                    <select class="staff-select input-staff" id="team-game_id">
+                        <option value="0" selected=""><?php ___('Select a Game', true); ?></option>
+                        <?php if ($games->isNotEmpty()): ?>
+
+                            <?php foreach ($games as $game): ?>
+                                <option value="<?php echo $game->id; ?>">
+                                    <?php echo $game->name; ?>
+                                </option>
+                            <?php endforeach; ?>
+
+                        <?php endif; ?>
+                    </select>
+
+                    <textarea class="input-staff" id="team-about" title="<?php ___('About'); ?>" placeholder="<?php ___('About', true); ?>"></textarea>
+
+                    <select class="staff-select input-staff" id="team-country">
+                        <option value="0" selected=""><?php ___('Select a Country', true); ?></option>
+                        <?php $countries = \PixieFreakPanel\Model\Countries::all(); ?>
+		                <?php if ($countries): ?>
+
+			                <?php foreach ($countries as $country): ?>
+                                <option value="<?php echo $country['code']; ?>">
+					                <?php echo $country['name']; ?>
+                                </option>
+			                <?php endforeach; ?>
+
+		                <?php endif; ?>
+                    </select>
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('My Team', true); ?></h4>
+                    </div>
+                    <select class="staff-select input-staff" id="team-my_team">
+                        <option value="1"><?php ___('Yes', true); ?></option>
+                        <option value="0" selected=""><?php ___('No', true); ?></option>
+                    </select>
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Year Founded', true); ?></h4>
+                    </div>
+
+                    <input type="text" class="pixie-input datepicker input-staff" name="startdate" size="35" value="" id="team-year_founded">
+
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Socials', true); ?></h4>
+                    </div>
+
+                    <input type="text" class="input-staff" placeholder="<?php ___('Facebook', true); ?>" id="team-facebook">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Instagram', true); ?>" id="team-instagram">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Twitch', true); ?>" id="team-twitch">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Steam', true); ?>" id="team-steam">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-team"
+                   data-id="0"
+            >
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<section id="photo" class="admin-section">
+    <form method="POST" class="footer-options-form">
+        <input type="hidden" name="task" value="general_settings">
+        <h2><?php esc_html_e('Photos', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <input type="button" class="button button-secondary btn-right" value="<?php ___('Add Photo', true); ?>" id="add-photo">
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table id="datatableGallery" class="widefat fixed" cellspacing="0">
+            <thead>
+            <tr>
+                <th class="tc"><?php ___('ID', true) ?></th>
+                <th class="tc"><?php ___('Photo', true) ?></th>
+                <th class="tc"><?php ___('Action', true) ?></th>
+            </tr>
+            </thead>
+            <tbody class="sortable">
+            <?php if ($photos->isNotEmpty()): ?>
+                <?php foreach ($photos as $photo): ?>
+
+                    <tr id="tr-<?php echo esc_attr($photo->id); ?>">
+                        <td class="tc"><?php echo esc_attr($photo->id); ?></td>
+                        <td class="tc">
+                            <div class="bgForImg hoverable">
+                                <img src="<?php echo esc_url($photo->image); ?>" class="hoverable-img hoverable-img-<?php echo $photo->id; ?>" style="display: none">
+                                <img src="<?php echo esc_url($photo->image); ?>" style="max-width: 15%;" data-id="<?php echo $photo->id; ?>">
+                            </div>
+                        </td>
+                        <td class="tc">
+                            <a class="edit-photo btns" rel="tipsy"
+                               title="<?php ___('Click here to edit photo.', true) ?>"
+                               data-id="<?php echo esc_attr($photo->id); ?>">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a data-id="<?php echo esc_attr($photo->id); ?>" rel="tipsy" title="<?php ___('Click here to remove this photo.', true) ?>"
+                               class="remove-photo btns">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            </tbody>
+        </table>
+    </form>
+</section>
+
+<div id="modal-photo" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p">
+                <?php echo ___('Edit Photo'); ?>
+            </p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Photo', true); ?></h4>
+                </div>
+                <div class="staff-member-image">
+                    <img src="">
+                    <input type="hidden" value="" id="gallery-image">
+                    <input type="submit" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary save-stats new-image">
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Category', true); ?></h4>
+                </div>
+                <select class="staff-select input-staff" id="gallery-gallery_category_id" title="<?php ___('Select Photo Category', true); ?>">
+                    <?php if ($categories->isNotEmpty()): ?>
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?php echo esc_attr($category->id); ?>">
+                                <?php echo esc_html($category->name); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-photo"
+                   data-id="0"
+            >
+        </div>
+    </div>
+</div>
+
+<?php scripts(__DIR__, 'photos'); ?>

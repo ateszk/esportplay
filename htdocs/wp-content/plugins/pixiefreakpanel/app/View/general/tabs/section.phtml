@@ -1,0 +1,43 @@
+<section id="section" class="admin-section">
+    <form method="POST" class="footer-options-form" action="<?php route('general_update'); ?>">
+        <input type="hidden" name="task" value="general_settings">
+
+        <h2><?php esc_html_e('Section settings', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+        </p>
+
+        <table class="form-table">
+            <tbody>
+            <tr>
+                <th scope="row">
+                    <p class="description" style="max-width: 100%;">
+                        <?php esc_html_e('Here you can reorder sections as you wish of the home page. To do this simply drag one section on the place you want it to be displayed first.', 'pixiefreakpanel'); ?>
+                    </p>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="sortable">
+            <ul class="sectionTable">
+                <?php foreach(pixiefreak_settings('general')->get('section_order') as $orderNum => $sectionName): ?>
+                    <?php
+                        $sectionAccessor = strtolower(str_replace(' ', '-', $sectionName));
+                        $isVisible = pixiefreak_settings('general')->get('section_visibility')[$sectionAccessor];
+                    ?>
+
+                    <li id="<?php echo esc_attr($orderNum) ?>" class="sectionBox <?php echo !$isVisible ? 'sectionHidden' : ''; ?>" data-id="<?php echo $sectionAccessor; ?>">
+                        <?php echo esc_attr($sectionName) ?>
+                            <p class="hidden-text">
+                                <?php !$isVisible ? esc_html_e('(HIDDEN)') : ''; ?>
+                            </p>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+        <?php submit('general_update'); ?>
+
+    </form>
+</section>

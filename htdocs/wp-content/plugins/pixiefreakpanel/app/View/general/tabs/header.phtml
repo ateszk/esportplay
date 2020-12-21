@@ -1,0 +1,63 @@
+<section id="header" class="admin-section">
+    <form method="POST" class="footer-options-form" action="<?php route('general_update'); ?>">
+        <input type="hidden" name="task" value="general_settings">
+
+        <h2><?php esc_html_e('Header settings', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <a target="_blank" href="<?php echo screenshots_path('p-header.jpg'); ?>">
+                <?php esc_html_e('Click here', 'pixiefreakpanel'); ?>
+            </a>
+            <?php esc_html_e('to see which element you are changing', 'pixiefreakpanel'); ?>
+        </p>
+
+        <table class="form-table">
+            <tbody>
+                <tr>
+                    <th scope="row">
+                        <?php esc_html_e('Show Search', 'pixiefreakpanel'); ?>
+                        <p class="description">
+                            <?php esc_html_e('Here you can hide the Search from from the Header.', 'pixiefreakpanel'); ?>
+                        </p>
+                    </th>
+                    <td class="tdCheckbox">
+                        <?php settings_checkbox('general', 'show_search'); ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <?php esc_html_e('News header background', 'pixiefreakpanel'); ?>
+                        <p class="description">
+                            <?php esc_html_e('Here you change/add news header background.', 'pixiefreakpanel'); ?>
+                        <div class="image-preview-holder image-preview-tournament default_background">
+                            <img class="image-preview img-preview-bnr" src="<?php echo pixiefreak_settings('general')->get('default_background'); ?>">
+                        </div>
+                        </p>
+                    </th>
+                    <td class="tdCheckbox">
+                        <input type="hidden" name="general_default_background" value="" id="general-default_background">
+                        <input type="button" class="button button-secondary" value="<?php echo ___('SELECT BANNER IMAGE'); ?>" id="default_background-bnr-img">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <?php esc_html_e('404 header background', 'pixiefreakpanel'); ?>
+                        <p class="description">
+                            <?php esc_html_e('Here you change/add 404 page background.', 'pixiefreakpanel'); ?>
+                        <div class="image-preview-holder image-preview-tournament notfound_background">
+                            <img class="image-preview img-preview-bnr" src="<?php echo pixiefreak_settings('general')->get('notfound_background'); ?>">
+                        </div>
+                        </p>
+                    </th>
+                    <td class="tdCheckbox">
+                        <input type="hidden" name="general_notfound_background" value="" id="general-notfound_background">
+                        <input type="button" class="button button-secondary" value="<?php echo ___('SELECT BANNER IMAGE'); ?>" id="notfound_background-bnr-img">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <?php submit('general_update'); ?>
+
+    </form>
+</section>

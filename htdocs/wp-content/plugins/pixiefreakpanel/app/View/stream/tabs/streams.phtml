@@ -1,0 +1,92 @@
+<section id="streams" class="admin-section">
+    <form method="POST" class="footer-options-form">
+        <input type="hidden" name="task" value="general_settings">
+        <h2><?php esc_html_e('Streams', 'pixiefreakpanel'); ?></h2>
+        <p class="demolink">
+            <span class="spliter">|</span>
+            <input type="button" class="button button-secondary btn-right" value="<?php ___('Add Stream Item', true); ?>" id="add-stream">
+        </p>
+
+        <div class="fusion-separator"></div>
+
+        <table id="datatableStream" class="widefat fixed" cellspacing="0">
+            <thead>
+                <tr>
+                    <th class="tc"><?php ___('ID', true) ?></th>
+                    <th class="tc"><?php ___('Title', true) ?></th>
+                    <th class="tc"><?php ___('Subtitle', true) ?></th>
+                    <th class="tc"><?php ___('Thumbnail', true) ?></th>
+                    <th class="tc"><?php ___('Online', true) ?></th>
+                    <!--<th class="tc"><?php /*___('View', true) */?></th>-->
+                    <th class="tc"><?php ___('Action', true) ?></th>
+                </tr>
+            </thead>
+            <tbody class="sortable">
+                <?php if ($streams->isNotEmpty()): ?>
+
+                    <?php foreach ($streams as $stream): ?>
+
+                        <?php include (__DIR__ . '/partials/stream-table-tr.phtml'); ?>
+
+                    <?php endforeach; ?>
+
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </form>
+</section>
+
+<div id="modal-stream" class="modal">
+    <div class="modal-content medium">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <p class="modal-header-p"><?php echo ___('Edit Stream'); ?></p>
+        </div>
+        <div class="modal-body">
+            <div class="staff-member">
+                <div class="staff-member-image">
+                    <img src="">
+                    <input type="hidden" value="" id="stream-thumbnail">
+                    <input type="submit" name="submitBtn"
+                           value="<?php echo ___('Choose image'); ?>"
+                           class="button button-primary save-stats new-image"
+                    >
+                </div>
+
+                <div class="separator-text">
+                    <h4 class="st4"><?php ___('Information', true); ?></h4>
+                </div>
+
+                <div class="input-groups">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Title', true); ?>" id="stream-title">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Subtitle', true); ?>" id="stream-subtitle">
+                    <input type="text" class="input-staff" placeholder="<?php ___('Link', true); ?>" id="stream-link">
+                    <div class="separator-text">
+                        <h4 class="st4"><?php ___('Online', true); ?></h4>
+                    </div>
+                    <select class="staff-select input-staff" id="stream-is_online">
+                        <option value="1" selected="">Online</option>
+                        <option value="2">Offline</option>
+                    </select>
+                    <select class="staff-select input-staff" id="stream-type">
+                        <?php foreach (\PixieFreakPanel\Model\Stream::TYPES as $key => $type):?>
+                            <option value="<?php echo $key; ?>">
+                                <?php echo $type; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit"
+                   name="submitBtn"
+                   value="<?php echo ___('SAVE'); ?>"
+                   class="button button-primary save-stream"
+                   data-id="0"
+            >
+        </div>
+    </div>
+</div>
+
+<?php scripts(__DIR__, 'streams'); ?>
